@@ -22,13 +22,12 @@
 
 **通过pip安装**
 
-运行以下命令，就可以从pip安装本服务的命令行工具。值得一提的是，工具是开源的，源代码就在本仓库的`src`目录下。
-
-`pip install rightchain`
+命令行工具是开源的，源代码就在本仓库的`src`目录下。
 
 有时，pypi镜像源可能会出现同步延迟的问题（例如TUNA）。用户可以通过下面这条命令，从官方pypi源进行安装。
 
-`pip install rightchain -i https://pypi.org/simple/`
+`pip install rightchain -U -i https://pypi.org/simple/`
+
 
 **测试安装**
 
