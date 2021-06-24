@@ -66,4 +66,6 @@ rightchain 借助区块链保护你的版权。以下的群体皆可以受益于
 
 数学上的证明是否成立？`recipe`和其他的字段是什么意思？
 
-[想了解相关信息，请看这里](./validate.md)
+[implementation-details](implementation-details.md)
+
+[validate](./validate.md)
