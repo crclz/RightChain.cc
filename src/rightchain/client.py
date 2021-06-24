@@ -3,7 +3,7 @@ import requests
 
 
 class RightClient:
-    def __init__(self, base_url="http://39.106.140.102:27021") -> None:
+    def __init__(self, base_url="https://rightchain.cc") -> None:
         if os.environ.get('RIGHT_BASEURL') is not None:
             base_url = os.environ.get('RIGHT_BASEURL')
             print(f"using RIGHT_BASEURL: {base_url}")
