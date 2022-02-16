@@ -56,6 +56,8 @@ def create_index():
     files = file_lister.list_files_with_gitignore_and_rightignore()
     data = get_sha256_of_files(files)
 
+    data = [p['hash'] for p in data] # only hash for filename privacy
+
     # write to index file
 
     prev_commit = get_previous_commit_hash()  # return "" when no prev commit
