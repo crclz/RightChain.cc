@@ -40,10 +40,7 @@ class CopyrightStoreService:
         self.writeJsonToFile(self.index_file, obj)
 
     def WriteSaltFile(self, obj: Dict) -> None:
-        content = json.dumps(obj, ensure_ascii=True, indent=4)
-        assert isinstance(content, str)
-        with open(self.salt_file, "r", encoding="utf8") as f:
-            f.write(content)
+        self.writeJsonToFile(self.salt_file, obj)
 
     def ReadIndexFile(self) -> Dict[str, Any]:
         return self.readJsonFromFile(self.index_file)
@@ -69,7 +66,7 @@ class CopyrightStoreService:
         return items
 
     def WritePackaged(self, commit: str, obj: Any) -> None:
-        self.writeJsonToFile(obj, os.path.join(self.packaged_dir, commit))
+        self.writeJsonToFile(os.path.join(self.packaged_dir, commit), obj)
 
     def RemoveWaitFile(self, commit: str) -> None:
         filename = os.path.join(self.wait_dir, commit)

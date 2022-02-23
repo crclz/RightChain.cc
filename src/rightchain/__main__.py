@@ -36,7 +36,6 @@ if __name__ == "__main__":
 
     if command == "create-index":
         controller.CreateIndex()
-        print("Create index complete.")
     elif command == "push-index":
         controller.PushIndex()
         print("Pushed index to server.")
@@ -46,5 +45,5 @@ if __name__ == "__main__":
     elif command == "fetch":
         controller.Fetch()
         print("Fetch from server complete")
-
-    raise Exception("Not reached")
+    else:
+        raise Exception("Not reached")

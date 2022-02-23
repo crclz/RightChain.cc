@@ -32,10 +32,8 @@ class IndexingService:
         h.update(s.encode("utf8"))
         return h.hexdigest().lower()
 
-    def randomString(self, length: int) -> str:
-        s = secrets.token_hex(length).lower()
-        assert len(s) == length
-        return s
+    def generateSalt(self, nbytes: int) -> str:
+        return secrets.token_hex(nbytes).lower()
 
     def GetRepositoryStatus(self) -> RepositoryStatus:
         filenames = self.fileListerService.list_files_with_gitignore_and_rightignore()
@@ -43,7 +41,7 @@ class IndexingService:
         files: List[File] = []
 
         for filename in filenames:
-            salt: str = self.randomString(30)
+            salt: str = self.generateSalt(30)
             hash = self.stringSha256(self.fileSha256(filename) + salt)
             files.append(File(filename, salt, hash))
 
