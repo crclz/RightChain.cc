@@ -13,6 +13,8 @@ class CopyrightStoreService:
         self.index_file = f"{self.right_dir}/index.json"
         self.salt_file = f"{self.right_dir}/salt.json"
 
+        self.ensure_all_dir_created()
+
     def create_dir(self, path: str):
         fileinfo = pathlib.Path(path)
         if fileinfo.exists():
@@ -66,9 +68,9 @@ class CopyrightStoreService:
 
         return items
 
-    def WritePackaged(self, commit:str, obj:Any)->None:
+    def WritePackaged(self, commit: str, obj: Any) -> None:
         self.writeJsonToFile(obj, os.path.join(self.packaged_dir, commit))
 
-    def RemoveWaitFile(self, commit:str)->None:
+    def RemoveWaitFile(self, commit: str) -> None:
         filename = os.path.join(self.wait_dir, commit)
         os.remove(filename)
