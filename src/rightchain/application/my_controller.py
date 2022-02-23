@@ -2,7 +2,6 @@ import json
 import os
 from typing import Any
 
-from numpy import record
 from rightchain.domain.models.index_record import IndexRecord
 from rightchain.domain.services.indexing import IndexingService
 from rightchain.infra.client import RightClient
@@ -55,7 +54,7 @@ class MyController:
                 indexRecord.UpdateInfo(recordInfo)
                 assert not indexRecord.IsWaiting
 
-                self.copyrightStoreService.SaveIndexRecord(record)
+                self.copyrightStoreService.SaveIndexRecord(indexRecord)
                 print("packaged:", indexRecord.commit)
             else:
                 print("still not packaged:", indexRecord.commit)
