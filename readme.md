@@ -47,6 +47,6 @@ rightchain 借助**区块链**保护你的**版权**。以下的群体皆可以�
 
 ## 延伸阅读
 
-`recipe`和其他的字段是什么意思？[implementation-details](implementation-details.md)
-
-数学上的证明是否成立？[validate](./validate.md)
+- [隐私](./readme-privacy.md)
+- `recipe`和其他的字段是什么意思？[implementation-details](implementation-details.md)
+- 数学上的证明是否成立？[validate](./validate.md)
