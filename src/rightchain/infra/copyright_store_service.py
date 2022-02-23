@@ -1,7 +1,7 @@
 import json
 import os
 import pathlib
-from typing import Any, Dict
+from typing import Any, Dict, List, Tuple
 
 
 class CopyrightStoreService:
@@ -50,3 +50,25 @@ class CopyrightStoreService:
         filename = os.path.join(self.wait_dir, commit)
         self.writeJsonToFile(filename, obj)
 
+    def GetWaitingItems(self) -> List[Tuple[str, str]]:
+        """
+        returns list of (commit_hash, token)
+        """
+        items: List[Tuple[str, str]] = []
+        for name in os.listdir(self.wait_dir):
+            commit_hash = name
+            filename = os.path.join(self.wait_dir, name)
+            json_info = self.readJsonFromFile(filename)
+
+            token = json_info["token"]
+
+            items.append((commit_hash, token))
+
+        return items
+
+    def WritePackaged(self, commit:str, obj:Any)->None:
+        self.writeJsonToFile(obj, os.path.join(self.packaged_dir, commit))
+
+    def RemoveWaitFile(self, commit:str)->None:
+        filename = os.path.join(self.wait_dir, commit)
+        os.remove(filename)

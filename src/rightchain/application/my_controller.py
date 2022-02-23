@@ -40,3 +40,18 @@ class MyController:
         self.copyrightStoreService.WriteWaitFile(commit, {"token": token})
 
         print(f"Pushed and create waiting file: {commit}")
+
+    def Fetch(self) -> None:
+        def is_packaged(record: dict):
+            return record["transactionId"] is not None
+
+        for commit, token in self.copyrightStoreService.GetWaitingItems():
+
+            record = self.rightClient.outofbox_get_record(token)
+
+            if is_packaged(record):
+                self.copyrightStoreService.WritePackaged(commit, record)
+                self.copyrightStoreService.RemoveWaitFile(commit)
+                print("packaged:", commit)
+            else:
+                print("still not packaged:", commit)
