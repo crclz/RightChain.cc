@@ -4,7 +4,6 @@ from typing import Any
 from rightchain.domain.services.indexing import IndexingService
 from rightchain.infra.client import RightClient
 from rightchain.infra.copyright_store_service import CopyrightStoreService
-from rightchain.utils import read_json_file
 
 
 class MyController:
