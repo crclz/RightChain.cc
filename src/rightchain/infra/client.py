@@ -4,10 +4,6 @@ import requests
 
 class RightClient:
     def __init__(self, base_url="https://rightchain.cc") -> None:
-        if os.environ.get('RIGHT_BASEURL') is not None:
-            base_url = os.environ.get('RIGHT_BASEURL')
-            print(f"using RIGHT_BASEURL: {base_url}")
-
         self.base_url = base_url
         self.sess = requests.session()
 

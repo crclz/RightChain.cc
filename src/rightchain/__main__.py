@@ -1,9 +1,9 @@
 import os
-from . import dir_config
-from .dir_config import ensure_all_dir_created
-from .fetch_record import do_fetch
-from .create_index import create_index, push_index
-from . import client as api_client
+from .infra import dir_config
+from .infra.dir_config import ensure_all_dir_created
+from .application.fetch_record import do_fetch
+from .application.create_index import create_index, push_index
+from .infra import client as api_client
 import sys
 import argparse
 

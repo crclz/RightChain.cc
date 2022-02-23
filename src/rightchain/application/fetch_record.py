@@ -1,9 +1,9 @@
-from .client import RightClient, login_using_env_and_get_client
+from ..infra.client import RightClient, login_using_env_and_get_client
 import json
 import os
-from . import dir_config as dc
+from ..infra import dir_config as dc
 
-from .utils import *
+from ..utils import *
 
 
 def get_waiting_items():
