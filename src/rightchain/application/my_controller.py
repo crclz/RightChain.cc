@@ -1,6 +1,9 @@
 import json
 import os
 from typing import Any
+
+from numpy import record
+from rightchain.domain.models.index_record import IndexRecord
 from rightchain.domain.services.indexing import IndexingService
 from rightchain.infra.client import RightClient
 from rightchain.infra.copyright_store_service import CopyrightStoreService
@@ -36,7 +39,7 @@ class MyController:
         token = self.rightClient.outofbox_create_record(indexFileHash)
 
         # responsibility transfer
-        self.copyrightStoreService.WriteWaitFile(commit, {"token": token})
+        self.copyrightStoreService.SaveIndexRecord(IndexRecord(commit, token, None))
 
         print(f"Pushed and create waiting file: {commit}")
 
@@ -44,13 +47,15 @@ class MyController:
         def is_packaged(record: dict):
             return record["transactionId"] is not None
 
-        for commit, token in self.copyrightStoreService.GetWaitingItems():
+        for indexRecord in self.copyrightStoreService.GetWaitingIndexRecords():
 
-            record = self.rightClient.outofbox_get_record(token)
+            recordInfo = self.rightClient.outofbox_get_record(indexRecord.token)
 
-            if is_packaged(record):
-                self.copyrightStoreService.WritePackaged(commit, record)
-                self.copyrightStoreService.RemoveWaitFile(commit)
-                print("packaged:", commit)
+            if is_packaged(recordInfo):
+                indexRecord.UpdateInfo(recordInfo)
+                assert not indexRecord.IsWaiting
+
+                self.copyrightStoreService.SaveIndexRecord(record)
+                print("packaged:", indexRecord.commit)
             else:
-                print("still not packaged:", commit)
+                print("still not packaged:", indexRecord.commit)

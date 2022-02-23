@@ -3,6 +3,8 @@ import os
 import pathlib
 from typing import Any, Dict, List, Tuple
 
+from rightchain.domain.models.index_record import IndexRecord
+
 
 class CopyrightStoreService:
     def __init__(self) -> None:
@@ -45,15 +47,24 @@ class CopyrightStoreService:
     def ReadIndexFile(self) -> Dict[str, Any]:
         return self.readJsonFromFile(self.index_file)
 
-    def WriteWaitFile(self, commit: str, obj: Dict) -> None:
-        filename = os.path.join(self.wait_dir, commit)
-        self.writeJsonToFile(filename, obj)
+    def SaveIndexRecord(self, record: IndexRecord) -> None:
+        waitingPath = os.path.join(self.wait_dir, record.commit)
+        packagedPath = os.path.join(self.packaged_dir, record.commit)
 
-    def GetWaitingItems(self) -> List[Tuple[str, str]]:
-        """
-        returns list of (commit_hash, token)
-        """
-        items: List[Tuple[str, str]] = []
+        if record.IsWaiting:
+            "save to waiting"
+            self.writeJsonToFile(waitingPath, {"token": record.token})
+
+        else:
+            "remove waiting"
+            if os.path.exists(waitingPath):
+                os.remove(waitingPath)
+
+            "save to packaged"
+            self.writeJsonToFile(packagedPath, record.recordInfo)
+
+    def GetWaitingIndexRecords(self) -> List[IndexRecord]:
+        items: List[IndexRecord] = []
         for name in os.listdir(self.wait_dir):
             commit_hash = name
             filename = os.path.join(self.wait_dir, name)
@@ -61,13 +72,7 @@ class CopyrightStoreService:
 
             token = json_info["token"]
 
-            items.append((commit_hash, token))
+            items.append(IndexRecord(commit_hash, token, None))
 
         return items
 
-    def WritePackaged(self, commit: str, obj: Any) -> None:
-        self.writeJsonToFile(os.path.join(self.packaged_dir, commit), obj)
-
-    def RemoveWaitFile(self, commit: str) -> None:
-        filename = os.path.join(self.wait_dir, commit)
-        os.remove(filename)
