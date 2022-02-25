@@ -8,13 +8,24 @@ def test_fileSha256():
     # arrange
     indexingService = IndexingService(Mock(), Mock(), Mock())
 
-    expectedSha256 = "03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4"
-    expectedSha256 = expectedSha256.lower()
+    expectedSha256 = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
     
     file = pathlib.Path(__file__).parent / 'sample.txt'
 
     # act
     result = indexingService.fileSha256(file.__str__())
+
+    # assert
+    assert expectedSha256 == result
+
+def test_stringSha256():
+    # arrange
+    indexingService = IndexingService(Mock(), Mock(), Mock())
+
+    expectedSha256 = "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f"
+    
+    # act
+    result = indexingService.stringSha256("Hello, World!")
 
     # assert
     assert expectedSha256 == result
