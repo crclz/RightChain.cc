@@ -1,7 +1,6 @@
 from typing import List
 from pathlib2 import Path
 import pathspec
-import os
 
 from rightchain.infra.copyright_store_service import CopyrightStoreService
 
@@ -55,7 +54,7 @@ class FileListerService:
         exclude_spec_lines.append(self.copyrightStoreService.right_dir)
 
         for ignorefile in [".gitignore", ".rightignore"]:
-            if os.path.exists(ignorefile):
+            if Path(ignorefile).exists():
                 print(f"using ignore file: {ignorefile}")
 
                 with open(ignorefile, "r", encoding="utf8") as f:
@@ -68,7 +67,7 @@ class FileListerService:
 
     def TryReadCopyrightInfo(self) -> "str|None":
         copyright_info = "copyright-info"
-        if os.path.exists(copyright_info):
+        if Path(copyright_info).exists():
             print(f"using copyright info: {copyright_info}")
 
             with open(copyright_info, "r", encoding="utf8") as f:
