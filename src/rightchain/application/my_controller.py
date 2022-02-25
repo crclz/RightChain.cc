@@ -1,7 +1,3 @@
-import json
-import os
-from typing import Any
-
 from rightchain.domain.models.index_record import IndexRecord
 from rightchain.domain.services.indexing import IndexingService
 from rightchain.infra.client import RightClient
