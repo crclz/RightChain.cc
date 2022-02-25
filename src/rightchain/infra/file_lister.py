@@ -1,4 +1,5 @@
 from typing import List
+from pathlib2 import Path
 import pathspec
 import os
 
@@ -11,15 +12,28 @@ class FileListerService:
         pass
 
     def list_all_files_in_workdir(self) -> List[str]:
-        all_files: List[str] = []
+        def formatPath(x: Path) -> str:
+            x = x.absolute()
+            x = x.relative_to(Path(".").absolute())
+            s = str(x).replace("\\", "/")
+            if not s.startswith("./"):
+                s = f"./{s}"
 
-        for dirpath, dirs, files in os.walk("."):
-            for name in files:
-                filename = os.path.join(dirpath, name)
-                filename = filename.replace("\\", "/")
-                all_files.append(filename)
+            return s
 
-        return all_files
+        files = self.getFilesRecursively(Path("."), True)
+
+        files = [formatPath(p) for p in files]
+
+        return files
+
+    def getFilesRecursively(self, path: Path, fileOnly: bool) -> List[Path]:
+        items: List[Path] = list(path.rglob("*"))
+
+        if fileOnly:
+            items = [p for p in items if p.is_file()]
+
+        return items
 
     def list_included_file_in_workdir(self, exclude_spec_lines: List[str]):
         spec = pathspec.PathSpec.from_lines(
