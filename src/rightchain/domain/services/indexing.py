@@ -35,16 +35,15 @@ class IndexingService:
     def generateSalt(self, nbytes: int) -> str:
         return secrets.token_hex(nbytes).lower()
 
+    def getFileEntity(self, filename: str) -> File:
+        salt: str = self.generateSalt(30)
+        hash = self.stringSha256(self.fileSha256(filename) + salt)
+        return File(filename, salt, hash)
+
     def GetRepositoryStatus(self) -> RepositoryStatus:
         filenames = self.fileListerService.list_files_with_gitignore_and_rightignore()
 
-        files: List[File] = []
-
-        for filename in filenames:
-            salt: str = self.generateSalt(30)
-            hash = self.stringSha256(self.fileSha256(filename) + salt)
-            files.append(File(filename, salt, hash))
-
+        files: List[File] = [self.getFileEntity(p) for p in filenames]
         copyrightInfo = self.fileListerService.TryReadCopyrightInfo()
         commit = self.gitService.GetPreviousCommitHash()
 

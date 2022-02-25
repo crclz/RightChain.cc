@@ -35,7 +35,7 @@ class FileListerService:
 
         return included
 
-    def list_files_with_gitignore_and_rightignore(self):
+    def list_files_with_gitignore_and_rightignore(self) -> List[str]:
         exclude_spec_lines = []
         exclude_spec_lines.append(".git")
         exclude_spec_lines.append(self.copyrightStoreService.right_dir)

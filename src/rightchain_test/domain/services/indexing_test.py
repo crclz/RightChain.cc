@@ -2,6 +2,7 @@ import pathlib
 from unittest.mock import Mock
 
 from rightchain.domain.services.indexing import IndexingService
+from rightchain.infra.file_lister import FileListerService
 
 
 def test_fileSha256():
@@ -36,10 +37,24 @@ def test_generateSalt():
     # arrange
     indexingService = IndexingService(Mock(), Mock(), Mock())
 
-    # act
+    # act"a
     result = indexingService.generateSalt(5)
 
     # assert
     assert isinstance(result, str)
     assert 10 == len(result)
 
+
+def test_GetFileEntity():
+    # arrange
+    indexingService = IndexingService(Mock(), Mock(), Mock())
+    indexingService.fileSha256 = Mock(return_value="xxx")
+
+    sha256 = indexingService.stringSha256
+
+    # act
+    result = indexingService.getFileEntity("a")
+
+    # assert
+    assert result.filename == "a"
+    assert result.hash == sha256("xxx" + result.salt)
