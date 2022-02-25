@@ -18,4 +18,4 @@ def test_list_all_files_in_workdir_happy():
 
     # assert
 
-    assert set(files) == {"./1.hello", "./2/3.hello"}
+    assert set(files) == {"1.hello", "2/3.hello"}
