@@ -47,7 +47,7 @@ class MyController:
             return record["transactionId"] is not None
 
         for indexRecord in self.copyrightStoreService.GetWaitingIndexRecords():
-
+            assert indexRecord.token is not None
             recordInfo = self.rightClient.outofbox_get_record(indexRecord.token)
 
             if is_packaged(recordInfo):
