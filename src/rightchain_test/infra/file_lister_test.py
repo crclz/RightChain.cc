@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from pathlib2 import Path
+from pathlib import Path
 from rightchain.infra.file_lister import FileListerService
 import os
 

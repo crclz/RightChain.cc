@@ -1,5 +1,5 @@
 from typing import List
-from pathlib2 import Path
+from pathlib import Path
 import pathspec
 
 from rightchain.infra.copyright_store_service import CopyrightStoreService
@@ -15,8 +15,6 @@ class FileListerService:
             x = x.absolute()
             x = x.relative_to(Path(".").absolute())
             s = str(x).replace("\\", "/")
-            if not s.startswith("./"):
-                s = f"./{s}"
 
             return s
 
