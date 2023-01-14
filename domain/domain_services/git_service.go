@@ -36,7 +36,7 @@ func (p *GitService) GitCommandName() string {
 func (p *GitService) CheckGitInstallation(ctx context.Context) error {
 	result, err := exec.CommandContext(ctx, p.GitCommandName(), "version").Output()
 	if err != nil {
-		return xerrors.Errorf(": %w", err)
+		return xerrors.Errorf("call git version error. output: %v, error: %w", string(result), err)
 	}
 
 	log.Printf("git version output: %v", string(result))
