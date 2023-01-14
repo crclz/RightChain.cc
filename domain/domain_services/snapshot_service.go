@@ -2,11 +2,14 @@ package domain_services
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"io"
 	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
-	"github.com/crclz/RightChain.cc/domain/utils"
 	"golang.org/x/xerrors"
 )
 
@@ -37,10 +40,6 @@ func initSingletonSnaphotService() *SnaphotService {
 }
 
 // methods
-
-func (p *SnaphotService) TakeSnapshot(ctx context.Context) (*domain_models.RepositorySnapshot, error) {
-	panic(utils.ErrNotImplemented)
-}
 
 func (p *SnaphotService) ListFiles(ctx context.Context) ([]string, error) {
 	// include: git tracked and untracked files
@@ -77,4 +76,54 @@ func (p *SnaphotService) ListFiles(ctx context.Context) ([]string, error) {
 	}
 
 	return newResults, nil
+}
+
+func (p *SnaphotService) TakeSnapshot(ctx context.Context) (*domain_models.RepositorySnapshot, error) {
+	commitHash, err := p.gitService.GetPreviousCommitHash(ctx)
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	filenames, err := p.ListFiles(ctx)
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	var fileSnapshots []*domain_models.FileSnapshot
+
+	for _, filename := range filenames {
+		hashString, err := p.Sha256(ctx, filename)
+		if err != nil {
+			return nil, xerrors.Errorf(": %w", err)
+		}
+
+		fileSnapshots = append(fileSnapshots, &domain_models.FileSnapshot{
+			Filename: filename,
+			Hash:     hashString,
+		})
+	}
+
+	return &domain_models.RepositorySnapshot{
+		PreviousCommit: commitHash,
+		FileSnapshots:  fileSnapshots,
+	}, nil
+}
+
+func (p *SnaphotService) Sha256(ctx context.Context, filename string) (string, error) {
+	f, err := os.Open(filename)
+	if err != nil {
+		return "", xerrors.Errorf(": %w", err)
+	}
+	defer f.Close()
+
+	h := sha256.New()
+	_, err = io.Copy(h, f)
+
+	if err != nil {
+		return "", xerrors.Errorf(": %w", err)
+	}
+
+	var hashBytes = h.Sum(nil)
+
+	return hex.EncodeToString(hashBytes), nil
 }
