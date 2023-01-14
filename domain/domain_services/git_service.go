@@ -81,6 +81,20 @@ func (p *GitService) ListFiles(ctx context.Context) ([]string, error) {
 		}
 	}
 
-	// TODO: untracked files
+	// git ls-files --exclude-standard --others
+	outputBytes, err = exec.CommandContext(ctx,
+		p.GitCommandName(), "ls-files", "--exclude-standard", "--others").Output()
+
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	outputLines = strings.Split(strings.ReplaceAll(string(outputBytes), "\r\n", "\n"), "\n")
+	for _, line := range outputLines {
+		if line != "" {
+			filenames = append(filenames, line)
+		}
+	}
+
 	return filenames, nil
 }
