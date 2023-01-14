@@ -62,3 +62,25 @@ func (p *GitService) GetPreviousCommitHash(ctx context.Context) (string, error) 
 
 	return commitHash, nil
 }
+
+func (p *GitService) ListFiles(ctx context.Context) ([]string, error) {
+	var filenames []string
+
+	// git ls-files --exclude-standard
+	outputBytes, err := exec.CommandContext(ctx,
+		p.GitCommandName(), "ls-files", "--exclude-standard").Output()
+
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	var outputLines = strings.Split(strings.ReplaceAll(string(outputBytes), "\r\n", "\n"), "\n")
+	for _, line := range outputLines {
+		if line != "" {
+			filenames = append(filenames, line)
+		}
+	}
+
+	// TODO: untracked files
+	return filenames, nil
+}
