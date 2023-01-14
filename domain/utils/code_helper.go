@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"testing"
@@ -21,4 +23,9 @@ func ToJson(x interface{}) string {
 	}
 
 	return string(s)
+}
+
+func GetSHA256(x string) string {
+	var a = sha256.Sum256([]byte(x))
+	return hex.EncodeToString(a[:])
 }
