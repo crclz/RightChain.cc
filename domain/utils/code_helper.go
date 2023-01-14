@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"math/rand"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -28,4 +29,14 @@ func ToJson(x interface{}) string {
 func GetSHA256(x string) string {
 	var a = sha256.Sum256([]byte(x))
 	return hex.EncodeToString(a[:])
+}
+
+func GenerateSalt(bytes int) string {
+	var data = make([]byte, bytes)
+	_, err := rand.Read(data)
+	if err != nil {
+		panic(err)
+	}
+
+	return hex.EncodeToString(data)
 }
