@@ -2,6 +2,7 @@ package domain_services_test
 
 import (
 	"context"
+	"strings"
 	"testing"
 
 	"github.com/bytedance/mockey"
@@ -39,4 +40,24 @@ func TestGitService_CheckGitInstallation_return_error_when_git_not_installed(t *
 		assert.Error(err)
 		assert.ErrorContains(err, "call git version error")
 	})
+}
+
+func TestGitService_GetPreviousCommitHash_return_hash_when_ok(t *testing.T) {
+	// arrange
+	var assert = utils.AnyAssert(t)
+
+	var ctx = context.TODO()
+	var gitService = domain_services.GetSingletonGitService()
+
+	// act
+	result, err := gitService.GetPreviousCommitHash(ctx)
+	assert.NoError(err)
+
+	// assert
+	assert.Equal(result, strings.ToLower(result))
+	assert.NotEmpty(result)
+
+	assert.True(len(result) > 20)
+
+	t.Logf("GetPreviousCommitHash Result: %v", result)
 }

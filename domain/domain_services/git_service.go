@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os/exec"
+	"strings"
 
 	"golang.org/x/xerrors"
 )
@@ -42,4 +43,22 @@ func (p *GitService) CheckGitInstallation(ctx context.Context) error {
 	log.Printf("git version output: %v", string(result))
 
 	return nil
+}
+
+func (p *GitService) GetPreviousCommitHash(ctx context.Context) (string, error) {
+	// git log --pretty=format:%H -1
+	result, err := exec.CommandContext(ctx,
+		p.GitCommandName(),
+		"log", "--pretty=format:%H", "-1").Output()
+
+	if err != nil {
+		return "", xerrors.Errorf(
+			"Get commit hash failed. Please make sure this repo has at lease 1 commit. output: %v, error: %w",
+			string(result), err)
+	}
+
+	var commitHash = string(result)
+	commitHash = strings.ToLower(commitHash)
+
+	return commitHash, nil
 }
