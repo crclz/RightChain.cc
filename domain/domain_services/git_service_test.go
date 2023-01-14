@@ -63,7 +63,7 @@ func TestGitService_GetPreviousCommitHash_return_hash_when_ok(t *testing.T) {
 	t.Logf("GetPreviousCommitHash Result: %v", result)
 }
 
-func TestGitService_ListFiles_happy_case(t *testing.T) {
+func TestGitService_ListTrackingFiles_happy_case(t *testing.T) {
 	// arrange
 	var assert = utils.AnyAssert(t)
 
@@ -78,11 +78,34 @@ func TestGitService_ListFiles_happy_case(t *testing.T) {
 	var gitService = domain_services.GetSingletonGitService()
 
 	// act
-	result, err := gitService.ListFiles(ctx)
+	result, err := gitService.ListTrackingFiles(ctx)
 	assert.NoError(err)
 
 	// assert
 	assert.True(len(result) > 5)
+
+	t.Logf("ListTrackingFiles Result: %v", result)
+}
+
+func TestGitService_ListUntrackedFiles_happy_case(t *testing.T) {
+	// arrange
+	var assert = utils.AnyAssert(t)
+
+	currentDir, err := os.Getwd()
+	assert.NoError(err)
+
+	defer os.Chdir(currentDir)
+
+	os.Chdir("../..")
+
+	var ctx = context.TODO()
+	var gitService = domain_services.GetSingletonGitService()
+
+	// act
+	result, err := gitService.ListUntrackedFiles(ctx)
+	assert.NoError(err)
+
+	// assert
 
 	t.Logf("ListFiles Result: %v", result)
 }
