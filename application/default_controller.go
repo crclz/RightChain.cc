@@ -24,7 +24,7 @@ func NewDefaultController(
 	recordSnapshotRepository *repos.RecordSnapshotRepository,
 	rightchainCenterService *domain_services.RightchainCenterService,
 	treeService *domain_services.TreeService,
-	UnpackagedIndexRepository *repos.UnpackagedIndexRepository,
+	unpackagedIndexRepository *repos.UnpackagedIndexRepository,
 	packagedIndexRepository *repos.PackagedIndexRepository,
 ) *DefaultController {
 	return &DefaultController{
@@ -32,7 +32,7 @@ func NewDefaultController(
 		recordSnapshotRepository:  recordSnapshotRepository,
 		rightchainCenterService:   rightchainCenterService,
 		treeService:               treeService,
-		UnpackagedIndexRepository: UnpackagedIndexRepository,
+		UnpackagedIndexRepository: unpackagedIndexRepository,
 		packagedIndexRepository:   packagedIndexRepository,
 	}
 }
@@ -97,13 +97,13 @@ func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 	}
 
 	// make unpackaged tree and save
-	var UnpackagedIndex = &domain_models.UnpackagedIndex{
+	var unpackagedIndex = &domain_models.UnpackagedIndex{
 		PreviousCommit:   snapshot.PreviousCommit,
 		RecordFetchToken: createRecordResponse.Token,
 		PartialTree:      newPartialTree,
 	}
 
-	err = p.UnpackagedIndexRepository.SaveUnpackagedIndex(ctx, UnpackagedIndex)
+	err = p.UnpackagedIndexRepository.SaveUnpackagedIndex(ctx, unpackagedIndex)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
@@ -119,25 +119,25 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 
 	log.Printf("UnpackagedIndexs: %v", len(UnpackagedIndexs))
 
-	for _, UnpackagedIndex := range UnpackagedIndexs {
-		recordResponse, err := p.rightchainCenterService.OutOfBoxGetRecord(ctx, UnpackagedIndex.RecordFetchToken)
+	for _, unpackagedIndex := range UnpackagedIndexs {
+		recordResponse, err := p.rightchainCenterService.OutOfBoxGetRecord(ctx, unpackagedIndex.RecordFetchToken)
 		if err != nil {
 			return xerrors.Errorf(": %w", err)
 		}
 
 		if recordResponse.TransactionId == "" {
-			log.Printf("still not packaged: %v", UnpackagedIndex.PreviousCommit)
+			log.Printf("still not packaged: %v", unpackagedIndex.PreviousCommit)
 			continue
 		}
 
 		// do package
 		var slimTree = recordResponse.SlimTree
 		target, targetParent := slimTree.FindNode(func(x *domain_models.RecipeNode) bool {
-			return x.Literal == UnpackagedIndex.PartialTree.GetOutput()
+			return x.Literal == unpackagedIndex.PartialTree.GetOutput()
 		})
 
 		if target == nil {
-			return xerrors.Errorf("Cannot match literal when processing: %v", UnpackagedIndex.PreviousCommit)
+			return xerrors.Errorf("Cannot match literal when processing: %v", unpackagedIndex.PreviousCommit)
 		}
 
 		if (targetParent.Left == target) == (targetParent.Right == target) {
@@ -145,20 +145,20 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 		}
 
 		if targetParent.Left == target {
-			targetParent.Left = UnpackagedIndex.PartialTree
+			targetParent.Left = unpackagedIndex.PartialTree
 		} else {
-			targetParent.Right = UnpackagedIndex.PartialTree
+			targetParent.Right = unpackagedIndex.PartialTree
 		}
 
 		slimTree.ClearCache()
 
 		if recordResponse.RootOutput != slimTree.GetOutput() {
-			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", UnpackagedIndex.PreviousCommit)
+			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", unpackagedIndex.PreviousCommit)
 		}
 
 		// success. TODO: save packagedIndex ,
 		var packagedIndex = &domain_models.PackagedIndex{
-			PreviousCommit: UnpackagedIndex.PreviousCommit,
+			PreviousCommit: unpackagedIndex.PreviousCommit,
 			TransactionId:  recordResponse.TransactionId,
 			RootOutput:     recordResponse.RootOutput,
 			Tree:           slimTree,
@@ -171,7 +171,7 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 		}
 
 		// TODO: 删除. (暂时不删除)
-		err = p.UnpackagedIndexRepository.Remove(ctx, UnpackagedIndex)
+		err = p.UnpackagedIndexRepository.Remove(ctx, unpackagedIndex)
 		if err != nil {
 			return xerrors.Errorf(": %w", err)
 		}
