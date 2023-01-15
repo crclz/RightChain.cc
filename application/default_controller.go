@@ -128,8 +128,41 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 
 		// do package
 		var slimTree = recordResponse.SlimTree
+		target, targetParent := slimTree.FindNode(func(x *domain_models.RecipeNode) bool {
+			return x.Literal == unpackagedTree.PartialTree.GetOutput()
+		})
+
+		if target == nil {
+			return xerrors.Errorf("Cannot match literal when processing: %v", unpackagedTree.PreviousCommit)
+		}
+
+		if (targetParent.Left == target) != (targetParent.Right == target) {
+			panic("find node logic error")
+		}
+
+		if targetParent.Left == target {
+			targetParent.Left = unpackagedTree.PartialTree
+		} else {
+			targetParent.Right = unpackagedTree.PartialTree
+		}
+
+		slimTree.ClearCache()
+
+		if recordResponse.RootOutput != slimTree.GetOutput() {
+			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", unpackagedTree.PreviousCommit)
+		}
+
+		// success. TODO: save packagedTree ,
+		// TODO: 删除. (暂时不删除)
+		var packagedTree = &domain_models.PackagedTree{
+			PreviousCommit: unpackagedTree.PreviousCommit,
+			TransactionId:  recordResponse.TransactionId,
+			RootOutput:     recordResponse.RootOutput,
+			Tree:           slimTree,
+		}
+
+		log.Printf("TODO: save pacakgedTree. %v, %v, %v", packagedTree.PreviousCommit, packagedTree.RootOutput, packagedTree.Tree.GetOutput())
 	}
 
-	// TODO: 删除. (暂时不删除)
-
+	return nil
 }
