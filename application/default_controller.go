@@ -171,6 +171,10 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 		}
 
 		// TODO: 删除. (暂时不删除)
+		err = p.unpackagedTreeRepository.Remove(ctx, unpackagedTree)
+		if err != nil {
+			return xerrors.Errorf(": %w", err)
+		}
 	}
 
 	return nil
