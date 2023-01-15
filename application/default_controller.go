@@ -2,7 +2,11 @@ package application
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"os"
+	"strings"
+	"time"
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/domain/domain_services"
@@ -186,13 +190,74 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 }
 
 // proof: 由于package和commit的不同步问题，所以只能手动将hash拷贝
-func (p *DefaultController) GenerateProof(ctx context.Context, files []string) error {
-	// previousCommit, err := p.gitService.GetPreviousCommitHash(ctx)
-	// if err != nil {
-	// 	return xerrors.Errorf(": %w", err)
-	// }
+func (p *DefaultController) GenerateProof(ctx context.Context, files []string, tryCrlf bool) error {
+	previousCommit, err := p.gitService.GetPreviousCommitHash(ctx)
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
 
 	panic(utils.ErrNotImplemented)
 
-	// var packagedIndex = p.packagedIndexRepository.GetPackagedIndexByPreviousCommit(previousCommit)
+	packagedIndex, err := p.packagedIndexRepository.GetPackagedIndexByPreviousCommit(ctx, previousCommit)
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
+
+	if packagedIndex == nil {
+		log.Printf("Cannot find packagedIndex, maybe you should copy it from newer commits. %v", previousCommit)
+		return nil
+	}
+
+	var proofDirectory = fmt.Sprintf("rightchain.proof.%v", time.Now().Unix())
+
+	err = os.MkdirAll(proofDirectory, 0755)
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
+
+	var filenameMap = map[string]string{}
+
+	for _, filename := range files {
+		fileBytes, err := os.ReadFile(filename)
+		if err != nil {
+			return xerrors.Errorf(": %w", err)
+		}
+
+		var fileHash = utils.GetSHA256OfBytes(fileBytes)
+
+		target, _ := packagedIndex.Tree.FindNode(func(x *domain_models.RecipeNode) bool {
+			return x.Literal == fileHash
+		})
+
+		if target == nil && tryCrlf {
+			var lfVersion = strings.ReplaceAll(string(fileBytes), "\r\n", "\n")
+			var crlfVersion = strings.ReplaceAll(lfVersion, "\n", "\r\n")
+
+			for _, version := range []string{lfVersion, crlfVersion} {
+				fileBytes = []byte(version)
+				fileHash = utils.GetSHA256OfBytes(fileBytes)
+				target, _ = packagedIndex.Tree.FindNode(func(x *domain_models.RecipeNode) bool {
+					return x.Literal == fileHash
+				})
+
+				if target != nil {
+					break
+				}
+			}
+		}
+
+		if target == nil {
+			return xerrors.Errorf("Cannot match any node in packagedIndex. filename: %v", filename)
+		}
+
+		// 标记
+		target.Keep = true
+
+		// copy to proof dir
+		filenameMap[filename] = fileHash
+		err = os.WriteFile(fmt.Sprintf("%v/%v", proofDirectory, fileHash), fileBytes, 0644)
+		if err != nil {
+			return xerrors.Errorf(": %w", err)
+		}
+	}
 }

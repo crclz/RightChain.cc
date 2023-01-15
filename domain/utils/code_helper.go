@@ -31,6 +31,11 @@ func GetSHA256(x string) string {
 	return hex.EncodeToString(a[:])
 }
 
+func GetSHA256OfBytes(x []byte) string {
+	var a = sha256.Sum256(x)
+	return hex.EncodeToString(a[:])
+}
+
 func GenerateSalt(bytes int) string {
 	var data = make([]byte, bytes)
 	_, err := rand.Read(data)

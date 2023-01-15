@@ -9,6 +9,8 @@ type RecipeNode struct {
 	LiteralToHash string      `json:"literalToHash,omitempty"`
 
 	outputCache string `json:"-"`
+
+	Keep bool `json:"-"`
 }
 
 func (p *RecipeNode) IsValid() bool {
