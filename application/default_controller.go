@@ -136,7 +136,7 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 			return xerrors.Errorf("Cannot match literal when processing: %v", unpackagedTree.PreviousCommit)
 		}
 
-		if (targetParent.Left == target) != (targetParent.Right == target) {
+		if (targetParent.Left == target) == (targetParent.Right == target) {
 			panic("find node logic error")
 		}
 
