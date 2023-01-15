@@ -86,5 +86,7 @@ rightchain 是一个公益性质的业余作品，具备以下商业应用没有
 6. 程序会生成`rightchain.proof.$timestamp`文件夹，建议不要提交到git。这个文件夹里面包含了：刚刚输入的文件（文件名是hash）、精简后的RecipeTree和相关transaction信息。
 
 
+## 原理
+[fundamental](fundamental.md)
 
 
