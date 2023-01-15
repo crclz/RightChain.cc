@@ -57,3 +57,23 @@ func (p *RightchainCenterService) OutOfBoxCreateRecord(ctx context.Context, cont
 
 	return response, nil
 }
+
+func (p *RightchainCenterService) OutOfBoxGetRecord(ctx context.Context, token string) (*dtos.OutOfBoxGetRecordResponse, error) {
+	var url = p.BaseUrl() + "/api/out-of-box/get-record"
+	httpResponse, err := req.R().
+		SetQueryParam("token", token).
+		SetContext(ctx).
+		Get(url)
+
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	var response = &dtos.OutOfBoxGetRecordResponse{}
+	err = httpResponse.UnmarshalJson(response)
+	if err != nil {
+		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	return response, nil
+}
