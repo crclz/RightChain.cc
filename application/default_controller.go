@@ -6,7 +6,6 @@ import (
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
 	"github.com/crclz/RightChain.cc/infra/repos"
 	"golang.org/x/xerrors"
 )
@@ -116,5 +115,21 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 
 	log.Printf("unpackagedTrees: %v", len(unpackagedTrees))
 
-	panic(utils.ErrNotImplemented)
+	for _, unpackagedTree := range unpackagedTrees {
+		recordResponse, err := p.rightchainCenterService.OutOfBoxGetRecord(ctx, unpackagedTree.RecordFetchToken)
+		if err != nil {
+			return xerrors.Errorf(": %w", err)
+		}
+
+		if recordResponse.TransactionId == "" {
+			log.Printf("still not packaged: %v", unpackagedTree.PreviousCommit)
+			continue
+		}
+
+		// do package
+		var slimTree = recordResponse.SlimTree
+	}
+
+	// TODO: 删除. (暂时不删除)
+
 }

@@ -63,3 +63,48 @@ func (p *RecipeNode) ClearCache() {
 		p.Right.ClearCache()
 	}
 }
+
+// return: target, targetParent
+func (p *RecipeNode) FindNode(predicate func(*RecipeNode) bool) (*RecipeNode, *RecipeNode) {
+	var target, targetParent *RecipeNode
+	var path []*RecipeNode
+
+	var dfs func(node *RecipeNode) bool
+
+	dfs = func(node *RecipeNode) bool {
+		if node == nil {
+			return false
+		}
+
+		path = append(path, node)
+		defer func() {
+			path = path[:len(path)-1]
+		}()
+
+		if predicate(node) {
+			target = node
+			if len(path) >= 2 {
+				targetParent = path[len(path)-2]
+			}
+			return true
+		}
+
+		for _, subNode := range []*RecipeNode{node.Left, node.Right} {
+			var found = dfs(subNode)
+			if found {
+				return found
+			}
+		}
+
+		return false
+	}
+
+	// act
+
+	dfs(p)
+	if len(path) != 0 {
+		panic("logic error")
+	}
+
+	return target, targetParent
+}
