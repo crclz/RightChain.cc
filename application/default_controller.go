@@ -277,13 +277,13 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 		}
 
 		var keepLeft = dfs(node.Left)
-		if !keepLeft {
+		if !keepLeft && node.Left != nil {
 			// trim left
 			node.Left = &domain_models.RecipeNode{Literal: node.Left.GetOutput()}
 		}
 
 		var keepRight = dfs(node.Right)
-		if !keepRight {
+		if !keepRight && node.Right != nil {
 			node.Right = &domain_models.RecipeNode{Literal: node.Right.GetOutput()}
 		}
 
