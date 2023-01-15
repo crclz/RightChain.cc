@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/alexflint/go-arg"
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/domain/domain_services"
 	"github.com/crclz/RightChain.cc/domain/utils"
@@ -67,6 +68,47 @@ func initSingletonDefaultController() *DefaultController {
 }
 
 // methods
+
+func (p *DefaultController) EntryPoint() {
+	// snapshot
+	// fetch
+	// proof --filenames xxx --filenames yyy --tryCrlf
+
+	var ctx = context.TODO()
+
+	var args struct {
+		Command string `arg:"positional"`
+
+		Filenames []string `arg:"separate"`
+		TryCrlf   bool
+	}
+	arg.MustParse(&args)
+
+	var err error
+
+	switch args.Command {
+	case "snapshot":
+		err = p.TakeSnapshotAndUpload(ctx)
+		if err != nil {
+			log.Printf("snapshot error: %+v", err)
+			log.Printf("%v", err)
+		}
+	case "fetch":
+		err = p.FetchAllUnpackagedIndexs(ctx)
+		if err != nil {
+			log.Printf("fetch error: %+v", err)
+			log.Printf("%v", err)
+		}
+	case "proof":
+		err = p.GenerateProof(ctx, args.Filenames, args.TryCrlf)
+		if err != nil {
+			log.Printf("proof error: %+v", err)
+			log.Printf("%v", err)
+		}
+	default:
+		log.Printf("Unknown command: %v", args.Command)
+	}
+}
 
 func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 	// take snapshot and save

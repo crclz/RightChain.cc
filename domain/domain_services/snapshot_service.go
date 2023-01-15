@@ -5,7 +5,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -68,7 +67,7 @@ func (p *SnaphotService) ListFiles(ctx context.Context) ([]string, error) {
 		}
 
 		if matched {
-			log.Printf("Ignore pattern match: %v", filename)
+			// log.Printf("Ignore pattern match: %v", filename)
 			continue
 		}
 

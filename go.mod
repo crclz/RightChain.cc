@@ -3,6 +3,7 @@ module github.com/crclz/RightChain.cc
 go 1.18
 
 require (
+	github.com/alexflint/go-arg v1.4.3
 	github.com/bytedance/mockey v1.0.0
 	github.com/imroc/req/v3 v3.29.0
 	github.com/stretchr/testify v1.8.1
@@ -10,6 +11,7 @@ require (
 )
 
 require (
+	github.com/alexflint/go-scalar v1.1.0 // indirect
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
