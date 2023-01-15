@@ -1,0 +1,353 @@
+{
+	"previousCommit": "7046a6eca8aebe71077ff39a30b59743b762f2c6",
+	"transactionId": "767f129fbbd60d7d2b9194f2337660d20d5f28a0d935b2acb4d45735038f8cd4",
+	"rootOutput": "04125017d0d282935b806fd67f618c51600e9e0788b771618baa14fb3bd4f1db",
+	"tree": {
+		"left": {
+			"left": {
+				"left": {
+					"left": {
+						"left": {
+							"left": {
+								"left": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "eafa6970deaf4de11f2faa917a945f8a5e77b76f666b0f079a24b5590a101df2"
+													},
+													"right": {
+														"literal": "0f471e966cc5a7de"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "6fca888efd2cebd0c614be103c6621f915b10a3d2d9f00170c1c67d9f5a007b0"
+													},
+													"right": {
+														"literal": "43a353a37886d541"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "6107d44aa514278c991e256f526108cfd0929a32e5824eac68cd476b75a56e2a"
+													},
+													"right": {
+														"literal": "f00a8cf52b8631a2"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "77a91d95a10829fb8d065dc28760935f3a1693021f777ed8ebe0591269b27f45"
+													},
+													"right": {
+														"literal": "481ff36168c11a13"
+													}
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "b6afc0a1523c0f3621c01e95c6a518d245161f2819f6a26c6816d24991483028"
+													},
+													"right": {
+														"literal": "ffc90ab2e5ae8a11"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "4b884cdc2768ed59446087abe941be34ac7c6a526b76d542e657199200ab5526"
+													},
+													"right": {
+														"literal": "c31e167be52898e9"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "5480d33e29923a0009dc36821f8118f1f9492f93f25b7d3ee7888affd6c509b6"
+													},
+													"right": {
+														"literal": "285c545e965ae261"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "96f086a3afb709648b236c5c527dbceebab0dd734010926fdf69b61f16c1285a"
+													},
+													"right": {
+														"literal": "f69496ec5a7670da"
+													}
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "6db2ec805e0658215078ff8d85ec058073186d7341e982c3231762612495c8b0"
+													},
+													"right": {
+														"literal": "e4e572ac62499e62"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "a8a45d3fb9b7ea3e122137cc09ff3f6c0e9528f081da47561b6d0b6fab40a8a0"
+													},
+													"right": {
+														"literal": "5f98cdb98eb15d00"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "13054aa862bf25f3c39c8a7b2b74b206f711dd7716c46c95c1b3c4ca43a2a0a9"
+													},
+													"right": {
+														"literal": "7d8f4b0cfedcf440"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "607cc4cd0dc1ef7be506b610e6e42916889b3a559c26040c5234bbaa32ce4b1c"
+													},
+													"right": {
+														"literal": "1beddbcdbef0b84b"
+													}
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "5d2c3a0c6c8b98b04e8540ccea86dd9eae3810a1143f12547dc3933b72a3bfe3"
+													},
+													"right": {
+														"literal": "6db8a6519739e84b"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "f750b92bf80840898261555801ebbc947b75ba042aa7547ba1126360890a7686"
+													},
+													"right": {
+														"literal": "cdfb74fef974a299"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "a2d63020d43a127269b91b6f70473a070a7a7a79d063a6888ec93228840f14b3"
+													},
+													"right": {
+														"literal": "6568c5cbdb7695f7"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "55a56ad41236d6270d44c82555517637ef9713c946f568fd86c59a3696012084"
+													},
+													"right": {
+														"literal": "12e539eda5f7a907"
+													}
+												}
+											}
+										}
+									}
+								},
+								"right": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "b399b2d0663cf4118f8792799da150a12ca010bea1af2c18a2f987c381179117"
+													},
+													"right": {
+														"literal": "13976535fbcd729f"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "073afa381aa16a62c5f27eec526e837af8456ad7c9ac609cd11f247c1d21db7e"
+													},
+													"right": {
+														"literal": "6128d270dd6e36c6"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "8a53b9c1e046534f8851f8f5be8baed83494048e4423433c9e3a7716defea2eb"
+													},
+													"right": {
+														"literal": "4e09508a2a695fe3"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "5c54b830e1422fd48f877f9ac646d2e1359cf6ad62107321a91978f3912d8cdd"
+													},
+													"right": {
+														"literal": "739489fb18ebfbc2"
+													}
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "d138a91c0c262267217cebc8ec6dc89f9d0990d9d9f5fa1538bf8518ca3765d2"
+													},
+													"right": {
+														"literal": "77347270352a2211"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "9bab00d19a1d73b1a727e2a61ce08e4d3ccb3ae9ccc2c96dbd1491049655c78e"
+													},
+													"right": {
+														"literal": "454d8634196176fd"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "46b610b102c24b76158cb737b15ef29dbd23559d2298dc73bf21b32b2119011e"
+													},
+													"right": {
+														"literal": "fd45e252a032cd0f"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "f9930418201a6ecf62c47a19f748110cc59106a26cc1e008b8d92a608a6863e0"
+													},
+													"right": {
+														"literal": "0f88bc7b3ffa00d6"
+													}
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "6298089a5545bd678155abde53608f703970057cf8c56d58fac38159779ba407"
+													},
+													"right": {
+														"literal": "4f941b4925f5704d"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "62b37c5d76edec221c1c0730b2858b54b6bd5384fb76f16bf28548afffe142a3"
+													},
+													"right": {
+														"literal": "aa8fc3387809c94c"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "3f1ac4b27db1d8ee0d025bdd9e1e51b225cf33eda30cfdc830007543bd0258d2"
+													},
+													"right": {
+														"literal": "1f634ab1f4ebf03d"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "067d2996ee4b029b471f76d15ab43fb2b7d4f6960d580f7a83ed344239b10aaf"
+													},
+													"right": {
+														"literal": "c3e89424b4cff670"
+													}
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"left": {
+														"literal": "58f93c9db667d10da517b6fafe22f3496157a3366d831338708218536fdd9090"
+													},
+													"right": {
+														"literal": "04aca2fc72116d96"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "ae9bb6887353d200390c0f501cae023478e772bf2d4f1a69bd89e2cbf0e6491a"
+													},
+													"right": {
+														"literal": "7c729d42dfbc7595"
+													}
+												}
+											},
+											"right": {
+												"left": {
+													"left": {
+														"literal": "d2ba07bbb7ce2af1f60d2016857e2a7ce4c4e78e0593c2bf66adad4a7f102c57"
+													},
+													"right": {
+														"literal": "1fe354cd030dcbf9"
+													}
+												},
+												"right": {
+													"left": {
+														"literal": "f40150ca54695424e14557ffe9142a8cc3c6d35e0c3e94bdf5f2056b1d222def"
+													},
+													"right": {
+														"literal": "3291cef202618f55"
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"right": {
+								"literal": "1548e4975fb9f75b"
+							}
+						},
+						"right": {
+							"literal": "2b221fe8b7d3c266"
+						}
+					},
+					"right": {
+						"literal": "13394ed1206d210b6ab4048c254708be2a7fe4f95fea4601a0d1b3d9c196b6e8"
+					}
+				},
+				"right": {
+					"literal": "8533e841dac303f454fd07d4dae771515ef5f129a9f9df07b0c6ab396ca16bbd"
+				}
+			},
+			"right": {
+				"literal": "a79eb0697e63f646bad4723a5e738db71835dbe4742d006a67a92a5fc953dcb9"
+			}
+		},
+		"right": {
+			"literal": "5aa5d5a0c0325a01a0332f80582af0f5a06fc923dad25e4c8f297423a46828e2"
+		}
+	}
+}
