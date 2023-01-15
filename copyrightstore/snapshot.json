@@ -1,133 +1,125 @@
 {
-	"previousCommit": "7046a6eca8aebe71077ff39a30b59743b762f2c6",
+	"previousCommit": "b6ff7d9009e12e86d2af5b21186a79cb6b1bdc1a",
 	"fileSnapshots": [
 		{
 			"filename": ".gitignore",
-			"hash": "eafa6970deaf4de11f2faa917a945f8a5e77b76f666b0f079a24b5590a101df2"
+			"hash": "48d6d0733aa7841c6a2b4874cebcd8f6979bbf441c1dc4e3487d8862263d1baf"
 		},
 		{
 			"filename": "application/default_controller.go",
-			"hash": "6fca888efd2cebd0c614be103c6621f915b10a3d2d9f00170c1c67d9f5a007b0"
+			"hash": "392ee8c85cff99718750d7d1fb0fdb2827b7646bd23f83764f070f3c256f2afc"
 		},
 		{
 			"filename": "application/default_controller_test.go",
-			"hash": "6107d44aa514278c991e256f526108cfd0929a32e5824eac68cd476b75a56e2a"
+			"hash": "f707df3073e3b84e4c47390f99fc01980afd4ab483943d55ced57d8a5834014c"
+		},
+		{
+			"filename": "docs/tree.jpg",
+			"hash": "d2ba07bbb7ce2af1f60d2016857e2a7ce4c4e78e0593c2bf66adad4a7f102c57"
 		},
 		{
 			"filename": "domain/domain_models/packaged_tree.go",
-			"hash": "77a91d95a10829fb8d065dc28760935f3a1693021f777ed8ebe0591269b27f45"
+			"hash": "d1b76acded408b65bcab587678ee13dc90631f8845e07a2e6e3a833cbb797d45"
+		},
+		{
+			"filename": "domain/domain_models/proof.go",
+			"hash": "b2baf49bba51db9ce7c68febb4e278c4c3a1887641b81474e333c56c75103a75"
 		},
 		{
 			"filename": "domain/domain_models/recipe_node.go",
-			"hash": "b6afc0a1523c0f3621c01e95c6a518d245161f2819f6a26c6816d24991483028"
+			"hash": "44d36d00d067dc1a18e8482e21c8a180cffd99371193ca0e2edb7f85a527d843"
 		},
 		{
 			"filename": "domain/domain_models/repository_snapshot.go",
 			"hash": "4b884cdc2768ed59446087abe941be34ac7c6a526b76d542e657199200ab5526"
 		},
 		{
-			"filename": "domain/domain_models/unpackaged_tree.go",
-			"hash": "5480d33e29923a0009dc36821f8118f1f9492f93f25b7d3ee7888affd6c509b6"
+			"filename": "domain/domain_models/unpackaged_index.go",
+			"hash": "d277378dd04cf6c605bc398eba44beb2fc71df19af7cb1e5410d1b8b452e4cc5"
 		},
 		{
 			"filename": "domain/domain_services/git_service.go",
-			"hash": "96f086a3afb709648b236c5c527dbceebab0dd734010926fdf69b61f16c1285a"
+			"hash": "a12a250fb1556b7bea5080d27389602ebfad0f6dd6ddc9899bb8877fb5275ce1"
 		},
 		{
 			"filename": "domain/domain_services/git_service_test.go",
-			"hash": "6db2ec805e0658215078ff8d85ec058073186d7341e982c3231762612495c8b0"
+			"hash": "6749b8ae5d103e7951149ed96f532104156478fe047af233ee85a10d6b7d4d6a"
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service.go",
-			"hash": "a8a45d3fb9b7ea3e122137cc09ff3f6c0e9528f081da47561b6d0b6fab40a8a0"
+			"hash": "345f3d41767d4b98e5688a29b3aa688180135e1c9113d6a6e74d8ce69aa28563"
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service_test.go",
-			"hash": "13054aa862bf25f3c39c8a7b2b74b206f711dd7716c46c95c1b3c4ca43a2a0a9"
+			"hash": "052173526ce95489fbbd297e4434bb3f356990ff56c29acd3d959f7b99bcd63e"
 		},
 		{
 			"filename": "domain/domain_services/snapshot_service.go",
-			"hash": "607cc4cd0dc1ef7be506b610e6e42916889b3a559c26040c5234bbaa32ce4b1c"
+			"hash": "5985431a86935dcdf590cf021fe49bff6844b3a39014a63eeef370a12e1d42d8"
 		},
 		{
 			"filename": "domain/domain_services/snapshot_service_test.go",
-			"hash": "5d2c3a0c6c8b98b04e8540ccea86dd9eae3810a1143f12547dc3933b72a3bfe3"
+			"hash": "620e3b540979aa2843d770a5e01b729001604556d0c86df71efe49ea95f52752"
 		},
 		{
 			"filename": "domain/domain_services/tree_service.go",
-			"hash": "f750b92bf80840898261555801ebbc947b75ba042aa7547ba1126360890a7686"
+			"hash": "ec28b4acd26f73efee4222cb12bd9aadd0283bfab15906eaeb4b4b1ded59b2dc"
 		},
 		{
 			"filename": "domain/domain_services/tree_service_test.go",
-			"hash": "a2d63020d43a127269b91b6f70473a070a7a7a79d063a6888ec93228840f14b3"
+			"hash": "298cb8a60962cccbb0e02db4b15a5b1ef45a69045ba6a5026d1be6f244cf42ae"
 		},
 		{
 			"filename": "domain/dtos/rightchain_center_dtos.go",
-			"hash": "55a56ad41236d6270d44c82555517637ef9713c946f568fd86c59a3696012084"
+			"hash": "26c71686e720a991b0426d72bd2f171b8f3ddafbb6ad18dd5e7dfdae5ffa0a04"
 		},
 		{
 			"filename": "domain/utils/code_helper.go",
-			"hash": "b399b2d0663cf4118f8792799da150a12ca010bea1af2c18a2f987c381179117"
+			"hash": "ef83f2ebd1e89c2013ed4bb4689eeae0efba8c10264bdc9e70beede83d9d996f"
+		},
+		{
+			"filename": "fundamental.md",
+			"hash": "2bfc059944019e7077e010541daf77527eebf8dbc0d9f6f34d63df3e650da622"
 		},
 		{
 			"filename": "go.mod",
-			"hash": "073afa381aa16a62c5f27eec526e837af8456ad7c9ac609cd11f247c1d21db7e"
+			"hash": "caf3c2608116c96a59dd9f5211ce42e55ffb0c4337102fb95a1678f8f67c1a87"
 		},
 		{
 			"filename": "go.sum",
-			"hash": "8a53b9c1e046534f8851f8f5be8baed83494048e4423433c9e3a7716defea2eb"
+			"hash": "bba0e4f8f28f0f6e3d604d9cf6b0f43c392d9c4e96a585e49f1b69090c9d4bb1"
 		},
 		{
 			"filename": "gotfv.ps1",
 			"hash": "5c54b830e1422fd48f877f9ac646d2e1359cf6ad62107321a91978f3912d8cdd"
 		},
 		{
-			"filename": "implementation-details.md",
-			"hash": "d138a91c0c262267217cebc8ec6dc89f9d0990d9d9f5fa1538bf8518ca3765d2"
+			"filename": "infra/data_sources/disk_copyright_store.go",
+			"hash": "02fd172a87a5cfc468cf7e85aa663ba3bf1846d5e82938668f353c51a3bc74cc"
 		},
 		{
-			"filename": "infra/data_sources/disk_copyright_store.go",
-			"hash": "9bab00d19a1d73b1a727e2a61ce08e4d3ccb3ae9ccc2c96dbd1491049655c78e"
+			"filename": "infra/repos/packaged_index_repository.go",
+			"hash": "935800a0712bdc5f83028db8cc74c7086dc765baa278856c189a4ee824754104"
+		},
+		{
+			"filename": "infra/repos/packaged_index_repository_test.go",
+			"hash": "37bcd5b8d86ddae1cd9eaa8716e7ef97d71cf78ca365e73017683223f6dce69e"
 		},
 		{
 			"filename": "infra/repos/record_snapshot_repository.go",
-			"hash": "46b610b102c24b76158cb737b15ef29dbd23559d2298dc73bf21b32b2119011e"
+			"hash": "36deb8c6267d37020ad7b5f154e7c3d54fdce16a75b0835b1ed1357120b76202"
 		},
 		{
 			"filename": "infra/repos/unpackaged_tree_repository.go",
-			"hash": "f9930418201a6ecf62c47a19f748110cc59106a26cc1e008b8d92a608a6863e0"
+			"hash": "51013555725edecb46782f7ff54cd23910eacc6c068c7154802ef45278344d23"
 		},
 		{
 			"filename": "main.go",
-			"hash": "6298089a5545bd678155abde53608f703970057cf8c56d58fac38159779ba407"
-		},
-		{
-			"filename": "publish.ps1",
-			"hash": "62b37c5d76edec221c1c0730b2858b54b6bd5384fb76f16bf28548afffe142a3"
-		},
-		{
-			"filename": "readme-privacy.md",
-			"hash": "3f1ac4b27db1d8ee0d025bdd9e1e51b225cf33eda30cfdc830007543bd0258d2"
-		},
-		{
-			"filename": "readme-tool.md",
-			"hash": "067d2996ee4b029b471f76d15ab43fb2b7d4f6960d580f7a83ed344239b10aaf"
+			"hash": "9ede83242149195a04e78a457ec8ba4a8e19185f9a74e0a0c5c33011f6bc94cb"
 		},
 		{
 			"filename": "readme.md",
-			"hash": "58f93c9db667d10da517b6fafe22f3496157a3366d831338708218536fdd9090"
-		},
-		{
-			"filename": "setup.py",
-			"hash": "ae9bb6887353d200390c0f501cae023478e772bf2d4f1a69bd89e2cbf0e6491a"
-		},
-		{
-			"filename": "tree.jpg",
-			"hash": "d2ba07bbb7ce2af1f60d2016857e2a7ce4c4e78e0593c2bf66adad4a7f102c57"
-		},
-		{
-			"filename": "validate.md",
-			"hash": "f40150ca54695424e14557ffe9142a8cc3c6d35e0c3e94bdf5f2056b1d222def"
+			"hash": "e509b19e9bf634ededfa8fc2ac3ce1ee4c3178d1e1719efbf4dd43373986cfe0"
 		}
 	]
 }
