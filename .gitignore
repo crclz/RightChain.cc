@@ -1,6 +1,7 @@
 # go
 *.tmp.*
-
+/RightChain.cc.exe
+/RightChain.cc
 
 
 .vscode
