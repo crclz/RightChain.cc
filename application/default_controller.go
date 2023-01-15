@@ -2,9 +2,11 @@ package application
 
 import (
 	"context"
+	"log"
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/domain/domain_services"
+	"github.com/crclz/RightChain.cc/domain/utils"
 	"github.com/crclz/RightChain.cc/infra/repos"
 	"golang.org/x/xerrors"
 )
@@ -104,4 +106,15 @@ func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
+	unpackagedTrees, err := p.unpackagedTreeRepository.GetAllUnpackagedTrees(ctx)
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
+
+	log.Printf("unpackagedTrees: %v", len(unpackagedTrees))
+
+	panic(utils.ErrNotImplemented)
 }
