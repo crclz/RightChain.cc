@@ -30,7 +30,7 @@ func initSingletonRightchainCenterService() *RightchainCenterService {
 // methods
 
 func (p *RightchainCenterService) BaseUrl() string {
-	const useLocal = true
+	const useLocal = false
 	if useLocal {
 		return "http://localhost:5071"
 	} else {
