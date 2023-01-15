@@ -2,6 +2,7 @@ package application
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -196,8 +197,6 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 		return xerrors.Errorf(": %w", err)
 	}
 
-	panic(utils.ErrNotImplemented)
-
 	packagedIndex, err := p.packagedIndexRepository.GetPackagedIndexByPreviousCommit(ctx, previousCommit)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
@@ -214,6 +213,8 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
+
+	// copy files and mark Keep in tree
 
 	var filenameMap = map[string]string{}
 
@@ -260,4 +261,61 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 			return xerrors.Errorf(": %w", err)
 		}
 	}
+
+	// trim the tree, only keep the Keep nodes
+
+	// return: this node should keep
+	var dfs func(*domain_models.RecipeNode) bool
+
+	dfs = func(node *domain_models.RecipeNode) bool {
+		if node == nil {
+			return false
+		}
+
+		if node.Keep {
+			return true
+		}
+
+		var keepLeft = dfs(node.Left)
+		if !keepLeft {
+			// trim left
+			node.Left = &domain_models.RecipeNode{Literal: node.Left.GetOutput()}
+		}
+
+		var keepRight = dfs(node.Right)
+		if !keepRight {
+			node.Right = &domain_models.RecipeNode{Literal: node.Right.GetOutput()}
+		}
+
+		return keepLeft || keepRight
+	}
+
+	// trim
+	dfs(packagedIndex.Tree)
+
+	// check integrity
+	packagedIndex.Tree.ClearCache()
+	if packagedIndex.Tree.GetOutput() != packagedIndex.RootOutput {
+		return xerrors.Errorf("Integrity check failure")
+	}
+
+	// write proof
+	var proof = &domain_models.Proof{
+		TransactionId: packagedIndex.TransactionId,
+		RootOutput:    packagedIndex.RootOutput,
+		FilenameMap:   filenameMap,
+		Tree:          packagedIndex.Tree,
+	}
+
+	proofBytes, err := json.MarshalIndent(proof, "", "\t")
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
+
+	err = os.WriteFile(fmt.Sprintf("%v/proof.json", proofDirectory), proofBytes, 0644)
+	if err != nil {
+		return xerrors.Errorf(": %w", err)
+	}
+
+	return nil
 }
