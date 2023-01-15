@@ -66,9 +66,9 @@ func (p *GitService) GetPreviousCommitHash(ctx context.Context) (string, error) 
 func (p *GitService) ListTrackingFiles(ctx context.Context) ([]string, error) {
 	var filenames []string
 
-	// git ls-files --exclude-standard
+	// git -c core.quotepath=off  ls-files --exclude-standard
 	outputBytes, err := exec.CommandContext(ctx,
-		p.GitCommandName(), "ls-files", "--exclude-standard").Output()
+		p.GitCommandName(), "-c", "core.quotepath=off", "ls-files", "--exclude-standard").Output()
 
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
@@ -87,9 +87,9 @@ func (p *GitService) ListTrackingFiles(ctx context.Context) ([]string, error) {
 func (p *GitService) ListUntrackedFiles(ctx context.Context) ([]string, error) {
 	var filenames []string
 
-	// git ls-files --exclude-standard --others
+	// git -c core.quotepath=off  ls-files --exclude-standard --others
 	outputBytes, err := exec.CommandContext(ctx,
-		p.GitCommandName(), "ls-files", "--exclude-standard", "--others").Output()
+		p.GitCommandName(), "-c", "core.quotepath=off", "ls-files", "--exclude-standard", "--others").Output()
 
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
