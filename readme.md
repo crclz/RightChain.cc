@@ -67,6 +67,24 @@ rightchain 是一个公益性质的业余作品，具备以下商业应用没有
 
 ### proof 命令
 
-当我们需要证明某件
+当我们需要证明某（几）个文件的版权，我们需要这两个东西
+- 关注的文件列表
+- RecipeTree
+
+其中，RecipeTree需要满足：
+- 根节点的输出被登记到了区块链上
+- 叶子节点是 “关注的文件列表”的hash 的超集
+
+准备工作:
+1. 从仓库的提交记录，或者最新的`copyrightstore/packaged`里面进行寻找，找出想要证明的仓库版本，由于同一文件在历史上存在多次修改和登记，所以你需要找到你想要的版本（commit）。这里记commit为$version
+2. 在checkout到\$version前，拷贝`copyrightstore/packaged/$version.json`到其他地方，例如桌面。
+3. git checkout $version
+4. 将刚刚的\$version.json拷贝到`copyrightstore/packaged/$version.json`
+5. 运行`rightchain.cc proof --filenames some-file.txt`
+   - `--filenames`参数可被传递多次，例如`rightchain.cc proof --filenames a.txt --filenames b.txt`
+   - `--trycrlf`参数是可选参数，是为了解决编辑器、git配置的CRLF设置不一致导致hash无法对上\$version.json里面的hash。开启此参数，程序核对hash失败后，就会自动尝试LF版本的和CRLF版本的文件。
+6. 程序会生成`rightchain.proof.$timestamp`文件夹，建议不要提交到git。这个文件夹里面包含了：刚刚输入的文件（文件名是hash）、精简后的RecipeTree和相关transaction信息。
+
+
 
 
