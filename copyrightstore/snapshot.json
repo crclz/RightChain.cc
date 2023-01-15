@@ -1,5 +1,5 @@
 {
-	"previousCommit": "13c5ed957cd2a15ec7e0aba5a9e6abd9ba110b9d",
+	"previousCommit": "7046a6eca8aebe71077ff39a30b59743b762f2c6",
 	"fileSnapshots": [
 		{
 			"filename": ".gitignore",
@@ -7,15 +7,19 @@
 		},
 		{
 			"filename": "application/default_controller.go",
-			"hash": "23911ec9b199aa08f41bbc7c48f6b108b5b24346bac0537f742b2e56a685c243"
+			"hash": "6fca888efd2cebd0c614be103c6621f915b10a3d2d9f00170c1c67d9f5a007b0"
 		},
 		{
 			"filename": "application/default_controller_test.go",
-			"hash": "4d039b4b3ff13dfd50d872f878fc8dd68b2cf1faa3dbef4f85df998682268cbb"
+			"hash": "6107d44aa514278c991e256f526108cfd0929a32e5824eac68cd476b75a56e2a"
+		},
+		{
+			"filename": "domain/domain_models/packaged_tree.go",
+			"hash": "77a91d95a10829fb8d065dc28760935f3a1693021f777ed8ebe0591269b27f45"
 		},
 		{
 			"filename": "domain/domain_models/recipe_node.go",
-			"hash": "84cc9899b982b6a6c2ab913c232b2a44fce603046e99bb97eb40b22797ab6d72"
+			"hash": "b6afc0a1523c0f3621c01e95c6a518d245161f2819f6a26c6816d24991483028"
 		},
 		{
 			"filename": "domain/domain_models/repository_snapshot.go",
@@ -35,11 +39,11 @@
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service.go",
-			"hash": "f4d768a4876807113515650b83c64fb0d48f5ff4b2a7ac47a492381379071763"
+			"hash": "a8a45d3fb9b7ea3e122137cc09ff3f6c0e9528f081da47561b6d0b6fab40a8a0"
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service_test.go",
-			"hash": "c392a7833ee5a6d9c186e2d24f821e6693dcd55538f3a010aabbce16017d3956"
+			"hash": "13054aa862bf25f3c39c8a7b2b74b206f711dd7716c46c95c1b3c4ca43a2a0a9"
 		},
 		{
 			"filename": "domain/domain_services/snapshot_service.go",
@@ -59,7 +63,7 @@
 		},
 		{
 			"filename": "domain/dtos/rightchain_center_dtos.go",
-			"hash": "c94488ffafa45486f856049c2ee74445cc64d033bc47081a5702d8558225d77d"
+			"hash": "55a56ad41236d6270d44c82555517637ef9713c946f568fd86c59a3696012084"
 		},
 		{
 			"filename": "domain/utils/code_helper.go",
@@ -91,7 +95,7 @@
 		},
 		{
 			"filename": "infra/repos/unpackaged_tree_repository.go",
-			"hash": "654c5bf086622fb202d3079d9ef459a2f0327b4f2c16d40fa04c8c18b5e3fa06"
+			"hash": "f9930418201a6ecf62c47a19f748110cc59106a26cc1e008b8d92a608a6863e0"
 		},
 		{
 			"filename": "main.go",
