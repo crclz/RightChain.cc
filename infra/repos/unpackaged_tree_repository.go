@@ -37,7 +37,7 @@ func initSingletonUnpackagedTreeRepository() *UnpackagedTreeRepository {
 
 // methods
 func (p *UnpackagedTreeRepository) SaveUnpackagedTree(ctx context.Context, tree *domain_models.UnpackagedTree) error {
-	var err = p.diskCopyrightStore.EnsureCopyrightStoreDirectory()
+	var err = p.diskCopyrightStore.EnsureUnpackagedDirectory()
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
