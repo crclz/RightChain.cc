@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
@@ -54,7 +54,7 @@ func (p *PackagedIndexRepository) SavePackagedIndex(ctx context.Context, tree *d
 		return xerrors.Errorf(": %w", err)
 	}
 
-	err = ioutil.WriteFile(p.GetPersistencePath(tree.PreviousCommit), fileContent, 0644)
+	err = os.WriteFile(p.GetPersistencePath(tree.PreviousCommit), fileContent, 0644)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
@@ -65,7 +65,12 @@ func (p *PackagedIndexRepository) SavePackagedIndex(ctx context.Context, tree *d
 func (p *PackagedIndexRepository) GetPackagedIndexByPreviousCommit(
 	ctx context.Context, previousCommit string,
 ) (*domain_models.PackagedIndex, error) {
-	fileContent, err := ioutil.ReadFile(p.GetPersistencePath(previousCommit))
+	fileContent, err := os.ReadFile(p.GetPersistencePath(previousCommit))
+
+	if os.IsNotExist(err) {
+		return nil, nil
+	}
+
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
@@ -89,7 +94,7 @@ func (p *PackagedIndexRepository) GetAllPackagedIndexs(ctx context.Context) ([]*
 	var results []*domain_models.PackagedIndex
 
 	for _, filename := range files {
-		fileContent, err := ioutil.ReadFile(filename)
+		fileContent, err := os.ReadFile(filename)
 		if err != nil {
 			return nil, xerrors.Errorf(": %w", err)
 		}

@@ -3,7 +3,7 @@ package repos
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"os"
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/infra/data_sources"
@@ -46,7 +46,7 @@ func (p *RecordSnapshotRepository) SaveSnapshot(ctx context.Context, snapshot *d
 		return xerrors.Errorf(": %w", err)
 	}
 
-	err = ioutil.WriteFile(p.diskCopyrightStore.CopyrightStorePath()+"/snapshot.json", snapshotJson, 0644)
+	err = os.WriteFile(p.diskCopyrightStore.CopyrightStorePath()+"/snapshot.json", snapshotJson, 0644)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}

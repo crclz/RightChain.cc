@@ -3,7 +3,6 @@ package domain_services_test
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -49,6 +48,6 @@ func TestSnapshotService_TakeSnapshot_happy_case_1(t *testing.T) {
 	jsonBytes, err := json.MarshalIndent(result, "", "\t")
 	assert.NoError(err)
 
-	err = ioutil.WriteFile("1-snapshot.tmp.json", jsonBytes, 0644)
+	err = os.WriteFile("1-snapshot.tmp.json", jsonBytes, 0644)
 	assert.NoError(err)
 }

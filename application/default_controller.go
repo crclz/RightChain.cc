@@ -6,6 +6,7 @@ import (
 
 	"github.com/crclz/RightChain.cc/domain/domain_models"
 	"github.com/crclz/RightChain.cc/domain/domain_services"
+	"github.com/crclz/RightChain.cc/domain/utils"
 	"github.com/crclz/RightChain.cc/infra/repos"
 	"golang.org/x/xerrors"
 )
@@ -17,6 +18,7 @@ type DefaultController struct {
 	treeService               *domain_services.TreeService
 	UnpackagedIndexRepository *repos.UnpackagedIndexRepository
 	packagedIndexRepository   *repos.PackagedIndexRepository
+	gitService                *domain_services.GitService
 }
 
 func NewDefaultController(
@@ -26,6 +28,7 @@ func NewDefaultController(
 	treeService *domain_services.TreeService,
 	unpackagedIndexRepository *repos.UnpackagedIndexRepository,
 	packagedIndexRepository *repos.PackagedIndexRepository,
+	gitService *domain_services.GitService,
 ) *DefaultController {
 	return &DefaultController{
 		snaphotService:            snaphotService,
@@ -34,6 +37,7 @@ func NewDefaultController(
 		treeService:               treeService,
 		UnpackagedIndexRepository: unpackagedIndexRepository,
 		packagedIndexRepository:   packagedIndexRepository,
+		gitService:                gitService,
 	}
 }
 
@@ -53,6 +57,7 @@ func initSingletonDefaultController() *DefaultController {
 		domain_services.GetSingletonTreeService(),
 		repos.GetSingletonUnpackagedIndexRepository(),
 		repos.GetSingletonPackagedIndexRepository(),
+		domain_services.GetSingletonGitService(),
 	)
 }
 
@@ -178,4 +183,16 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 	}
 
 	return nil
+}
+
+// proof: 由于package和commit的不同步问题，所以只能手动将hash拷贝
+func (p *DefaultController) GenerateProof(ctx context.Context, files []string) error {
+	// previousCommit, err := p.gitService.GetPreviousCommitHash(ctx)
+	// if err != nil {
+	// 	return xerrors.Errorf(": %w", err)
+	// }
+
+	panic(utils.ErrNotImplemented)
+
+	// var packagedIndex = p.packagedIndexRepository.GetPackagedIndexByPreviousCommit(previousCommit)
 }

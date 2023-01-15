@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -55,7 +54,7 @@ func (p *UnpackagedIndexRepository) SaveUnpackagedIndex(ctx context.Context, tre
 		return xerrors.Errorf(": %w", err)
 	}
 
-	err = ioutil.WriteFile(p.GetPersistencePath(tree.PreviousCommit), fileContent, 0644)
+	err = os.WriteFile(p.GetPersistencePath(tree.PreviousCommit), fileContent, 0644)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
@@ -66,7 +65,7 @@ func (p *UnpackagedIndexRepository) SaveUnpackagedIndex(ctx context.Context, tre
 func (p *UnpackagedIndexRepository) GetUnpackagedIndexByPreviousCommit(
 	ctx context.Context, previousCommit string,
 ) (*domain_models.UnpackagedIndex, error) {
-	fileContent, err := ioutil.ReadFile(p.GetPersistencePath(previousCommit))
+	fileContent, err := os.ReadFile(p.GetPersistencePath(previousCommit))
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
@@ -90,7 +89,7 @@ func (p *UnpackagedIndexRepository) GetAllUnpackagedIndexs(ctx context.Context) 
 	var results []*domain_models.UnpackagedIndex
 
 	for _, filename := range files {
-		fileContent, err := ioutil.ReadFile(filename)
+		fileContent, err := os.ReadFile(filename)
 		if err != nil {
 			return nil, xerrors.Errorf(": %w", err)
 		}
