@@ -1,6 +1,6 @@
 package domain_models
 
-type PackagedTree struct {
+type PackagedIndex struct {
 	PreviousCommit string      `json:"previousCommit"`
 	TransactionId  string      `json:"transactionId"`
 	RootOutput     string      `json:"rootOutput"`

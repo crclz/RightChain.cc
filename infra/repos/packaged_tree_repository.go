@@ -12,38 +12,38 @@ import (
 	"golang.org/x/xerrors"
 )
 
-type PackagedTreeRepository struct {
+type PackagedIndexRepository struct {
 	diskCopyrightStore *data_sources.DiskCopyrightStore
 }
 
-func NewPackagedTreeRepository(
+func NewPackagedIndexRepository(
 	diskCopyrightStore *data_sources.DiskCopyrightStore,
-) *PackagedTreeRepository {
-	return &PackagedTreeRepository{
+) *PackagedIndexRepository {
+	return &PackagedIndexRepository{
 		diskCopyrightStore: diskCopyrightStore,
 	}
 }
 
 // wire
 
-var singletonPackagedTreeRepository *PackagedTreeRepository = initSingletonPackagedTreeRepository()
+var singletonPackagedIndexRepository *PackagedIndexRepository = initSingletonPackagedIndexRepository()
 
-func GetSingletonPackagedTreeRepository() *PackagedTreeRepository {
-	return singletonPackagedTreeRepository
+func GetSingletonPackagedIndexRepository() *PackagedIndexRepository {
+	return singletonPackagedIndexRepository
 }
 
-func initSingletonPackagedTreeRepository() *PackagedTreeRepository {
-	return NewPackagedTreeRepository(data_sources.GetSingletonDiskCopyrightStore())
+func initSingletonPackagedIndexRepository() *PackagedIndexRepository {
+	return NewPackagedIndexRepository(data_sources.GetSingletonDiskCopyrightStore())
 }
 
 // methods
 
-func (p *PackagedTreeRepository) GetPersistencePath(previousCommit string) string {
+func (p *PackagedIndexRepository) GetPersistencePath(previousCommit string) string {
 	var filePath = fmt.Sprintf("%v/%v.json", p.diskCopyrightStore.PackagedPath(), previousCommit)
 	return filePath
 }
 
-func (p *PackagedTreeRepository) SavePackagedTree(ctx context.Context, tree *domain_models.PackagedTree) error {
+func (p *PackagedIndexRepository) SavePackagedIndex(ctx context.Context, tree *domain_models.PackagedIndex) error {
 	var err = p.diskCopyrightStore.EnsurePackagedDirectory()
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
@@ -62,15 +62,15 @@ func (p *PackagedTreeRepository) SavePackagedTree(ctx context.Context, tree *dom
 	return nil
 }
 
-func (p *PackagedTreeRepository) GetPackagedTreeByPreviousCommit(
+func (p *PackagedIndexRepository) GetPackagedIndexByPreviousCommit(
 	ctx context.Context, previousCommit string,
-) (*domain_models.PackagedTree, error) {
+) (*domain_models.PackagedIndex, error) {
 	fileContent, err := ioutil.ReadFile(p.GetPersistencePath(previousCommit))
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
 
-	var result = &domain_models.PackagedTree{}
+	var result = &domain_models.PackagedIndex{}
 	err = json.Unmarshal(fileContent, result)
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
@@ -79,14 +79,14 @@ func (p *PackagedTreeRepository) GetPackagedTreeByPreviousCommit(
 	return result, nil
 }
 
-func (p *PackagedTreeRepository) GetAllPackagedTrees(ctx context.Context) ([]*domain_models.PackagedTree, error) {
+func (p *PackagedIndexRepository) GetAllPackagedIndexs(ctx context.Context) ([]*domain_models.PackagedIndex, error) {
 
 	files, err := filepath.Glob(p.diskCopyrightStore.PackagedPath() + "/*.json")
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
 
-	var results []*domain_models.PackagedTree
+	var results []*domain_models.PackagedIndex
 
 	for _, filename := range files {
 		fileContent, err := ioutil.ReadFile(filename)
@@ -94,7 +94,7 @@ func (p *PackagedTreeRepository) GetAllPackagedTrees(ctx context.Context) ([]*do
 			return nil, xerrors.Errorf(": %w", err)
 		}
 
-		var result = &domain_models.PackagedTree{}
+		var result = &domain_models.PackagedIndex{}
 		err = json.Unmarshal(fileContent, result)
 		if err != nil {
 			return nil, xerrors.Errorf(": %w", err)

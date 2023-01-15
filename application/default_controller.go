@@ -16,7 +16,7 @@ type DefaultController struct {
 	rightchainCenterService   *domain_services.RightchainCenterService
 	treeService               *domain_services.TreeService
 	UnpackagedIndexRepository *repos.UnpackagedIndexRepository
-	packagedTreeRepository    *repos.PackagedTreeRepository
+	packagedIndexRepository   *repos.PackagedIndexRepository
 }
 
 func NewDefaultController(
@@ -25,7 +25,7 @@ func NewDefaultController(
 	rightchainCenterService *domain_services.RightchainCenterService,
 	treeService *domain_services.TreeService,
 	UnpackagedIndexRepository *repos.UnpackagedIndexRepository,
-	packagedTreeRepository *repos.PackagedTreeRepository,
+	packagedIndexRepository *repos.PackagedIndexRepository,
 ) *DefaultController {
 	return &DefaultController{
 		snaphotService:            snaphotService,
@@ -33,7 +33,7 @@ func NewDefaultController(
 		rightchainCenterService:   rightchainCenterService,
 		treeService:               treeService,
 		UnpackagedIndexRepository: UnpackagedIndexRepository,
-		packagedTreeRepository:    packagedTreeRepository,
+		packagedIndexRepository:   packagedIndexRepository,
 	}
 }
 
@@ -52,7 +52,7 @@ func initSingletonDefaultController() *DefaultController {
 		domain_services.GetSingletonRightchainCenterService(),
 		domain_services.GetSingletonTreeService(),
 		repos.GetSingletonUnpackagedIndexRepository(),
-		repos.GetSingletonPackagedTreeRepository(),
+		repos.GetSingletonPackagedIndexRepository(),
 	)
 }
 
@@ -156,16 +156,16 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", UnpackagedIndex.PreviousCommit)
 		}
 
-		// success. TODO: save packagedTree ,
-		var packagedTree = &domain_models.PackagedTree{
+		// success. TODO: save packagedIndex ,
+		var packagedIndex = &domain_models.PackagedIndex{
 			PreviousCommit: UnpackagedIndex.PreviousCommit,
 			TransactionId:  recordResponse.TransactionId,
 			RootOutput:     recordResponse.RootOutput,
 			Tree:           slimTree,
 		}
 
-		log.Printf("save pacakgedTree. %v, %v, %v", packagedTree.PreviousCommit, packagedTree.RootOutput, packagedTree.Tree.GetOutput())
-		err = p.packagedTreeRepository.SavePackagedTree(ctx, packagedTree)
+		log.Printf("save pacakgedTree. %v, %v, %v", packagedIndex.PreviousCommit, packagedIndex.RootOutput, packagedIndex.Tree.GetOutput())
+		err = p.packagedIndexRepository.SavePackagedIndex(ctx, packagedIndex)
 		if err != nil {
 			return xerrors.Errorf(": %w", err)
 		}
