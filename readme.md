@@ -73,10 +73,10 @@ rightchain 是一个公益性质的业余作品，具备以下商业应用没有
 
 其中，RecipeTree需要满足：
 - 根节点的输出被登记到了区块链上
-- 叶子节点是 “关注的文件列表”的hash 的超集
+- 对于“关注的文件列表”中的每一个文件，它的hash都能在树中找到
 
-准备工作:
-1. 从仓库的提交记录，或者最新的`copyrightstore/packaged`里面进行寻找，找出想要证明的仓库版本，由于同一文件在历史上存在多次修改和登记，所以你需要找到你想要的版本（commit）。这里记commit为$version
+步骤:
+1. 从仓库的提交记录，或者最新的`copyrightstore/packaged`里面进行寻找，找出想要证明的仓库版本。由于同一文件在历史上存在多次修改和登记，所以你需要找到你想要的版本（commit）。这里记commit为$version
 2. 在checkout到\$version前，拷贝`copyrightstore/packaged/$version.json`到其他地方，例如桌面。
 3. git checkout $version
 4. 将刚刚的\$version.json拷贝到`copyrightstore/packaged/$version.json`
