@@ -1,6 +1,6 @@
 package domain_models
 
-import "github.com/crclz/RightChain.cc/domain/utils"
+import "github.com/crclz/rightchain.cc/domain/utils"
 
 type RecipeNode struct {
 	Left          *RecipeNode `json:"left,omitempty"`

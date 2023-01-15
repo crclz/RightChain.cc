@@ -1,6 +1,6 @@
 package dtos
 
-import "github.com/crclz/RightChain.cc/domain/domain_models"
+import "github.com/crclz/rightchain.cc/domain/domain_models"
 
 type OutOfBoxCreateRecordResponse struct {
 	Token      string                    `json:"token"`

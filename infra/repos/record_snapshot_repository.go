@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/crclz/RightChain.cc/domain/domain_models"
-	"github.com/crclz/RightChain.cc/infra/data_sources"
+	"github.com/crclz/rightchain.cc/domain/domain_models"
+	"github.com/crclz/rightchain.cc/infra/data_sources"
 	"golang.org/x/xerrors"
 )
 

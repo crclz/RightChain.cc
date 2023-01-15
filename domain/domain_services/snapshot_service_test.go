@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/domain/domain_services"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 func TestSnapshotService_ListFiles_happy_case_1(t *testing.T) {

@@ -2,6 +2,7 @@
 *.tmp.*
 /RightChain.cc.exe
 /RightChain.cc
+/rightchain.cc
 rightchain.proof.*
 
 

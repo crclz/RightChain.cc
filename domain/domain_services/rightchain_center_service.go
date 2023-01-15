@@ -3,7 +3,7 @@ package domain_services
 import (
 	"context"
 
-	"github.com/crclz/RightChain.cc/domain/dtos"
+	"github.com/crclz/rightchain.cc/domain/dtos"
 	"github.com/imroc/req/v3"
 	"golang.org/x/xerrors"
 )

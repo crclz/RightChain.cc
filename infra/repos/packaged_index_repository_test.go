@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/crclz/RightChain.cc/domain/utils"
-	"github.com/crclz/RightChain.cc/infra/repos"
+	"github.com/crclz/rightchain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/infra/repos"
 )
 
 func TestPackagedIndexRepository_GetPackagedIndexByPreviousCommit_return_nil_when_not_exist(t *testing.T) {

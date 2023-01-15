@@ -1,4 +1,4 @@
-module github.com/crclz/RightChain.cc
+module github.com/crclz/rightchain.cc
 
 go 1.18
 

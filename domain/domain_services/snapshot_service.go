@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/crclz/RightChain.cc/domain/domain_models"
+	"github.com/crclz/rightchain.cc/domain/domain_models"
 	"golang.org/x/xerrors"
 )
 

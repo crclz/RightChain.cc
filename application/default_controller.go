@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/alexflint/go-arg"
-	"github.com/crclz/RightChain.cc/domain/domain_models"
-	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
-	"github.com/crclz/RightChain.cc/infra/repos"
+	"github.com/crclz/rightchain.cc/domain/domain_models"
+	"github.com/crclz/rightchain.cc/domain/domain_services"
+	"github.com/crclz/rightchain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/infra/repos"
 	"golang.org/x/xerrors"
 )
 

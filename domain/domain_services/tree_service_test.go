@@ -3,9 +3,9 @@ package domain_services_test
 import (
 	"testing"
 
-	"github.com/crclz/RightChain.cc/domain/domain_models"
-	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/domain/domain_models"
+	"github.com/crclz/rightchain.cc/domain/domain_services"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 func TestTreeService_BuildTreeFromSnapshot_happy_case_1(t *testing.T) {

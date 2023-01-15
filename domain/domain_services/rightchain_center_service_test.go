@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/domain/domain_services"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 func TestRightchainCenterService_OutOfBoxCreateRecord_integrity_check(t *testing.T) {

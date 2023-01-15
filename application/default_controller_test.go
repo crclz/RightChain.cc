@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crclz/RightChain.cc/application"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/application"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 func TestDefaultController_TakeSnapshotAndUpload_happy_1(t *testing.T) {

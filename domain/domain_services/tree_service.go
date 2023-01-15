@@ -1,8 +1,8 @@
 package domain_services
 
 import (
-	"github.com/crclz/RightChain.cc/domain/domain_models"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/domain/domain_models"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 type TreeService struct {

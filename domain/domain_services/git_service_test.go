@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/bytedance/mockey"
-	"github.com/crclz/RightChain.cc/domain/domain_services"
-	"github.com/crclz/RightChain.cc/domain/utils"
+	"github.com/crclz/rightchain.cc/domain/domain_services"
+	"github.com/crclz/rightchain.cc/domain/utils"
 )
 
 func TestGitService_CheckGitInstallation_return_nil_when_git_installed(t *testing.T) {
