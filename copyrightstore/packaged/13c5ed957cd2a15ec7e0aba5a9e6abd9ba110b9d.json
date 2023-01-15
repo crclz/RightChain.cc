@@ -1,0 +1,338 @@
+{
+	"previousCommit": "13c5ed957cd2a15ec7e0aba5a9e6abd9ba110b9d",
+	"transactionId": "ba83197c4f454c192b55e9c2c0bd4f3c3fa34ee3a754d0615371f79ea3ba2140",
+	"rootOutput": "6b324d6818310dce5b1bb1bcc7342baf49c85d6ce3f21475db488796d80239e5",
+	"tree": {
+		"left": {
+			"literal": "2f84848468fea194f564cad4233a9ef2b07edaef8a9fa6de4cbb7c92bfab9807"
+		},
+		"right": {
+			"left": {
+				"literal": "dbb57dce9bc2aec54bd1a7f5f2524cc6aaf5e84b63812e7f6fecb8e74b116c8a"
+			},
+			"right": {
+				"left": {
+					"literal": "84dea051e040e86af1987b2e4ce73a6ba9e8cc8dbfd43982164c19770f514656"
+				},
+				"right": {
+					"left": {
+						"left": {
+							"left": {
+								"left": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "eafa6970deaf4de11f2faa917a945f8a5e77b76f666b0f079a24b5590a101df2"
+												},
+												"right": {
+													"literal": "cc64a104799f469d"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "23911ec9b199aa08f41bbc7c48f6b108b5b24346bac0537f742b2e56a685c243"
+												},
+												"right": {
+													"literal": "ca2d024d2f7d4b4f"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "4d039b4b3ff13dfd50d872f878fc8dd68b2cf1faa3dbef4f85df998682268cbb"
+												},
+												"right": {
+													"literal": "3c2e70bd67c9a316"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "84cc9899b982b6a6c2ab913c232b2a44fce603046e99bb97eb40b22797ab6d72"
+												},
+												"right": {
+													"literal": "96f2587f8b0c9b59"
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "4b884cdc2768ed59446087abe941be34ac7c6a526b76d542e657199200ab5526"
+												},
+												"right": {
+													"literal": "ddcb9fef2f36261a"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "5480d33e29923a0009dc36821f8118f1f9492f93f25b7d3ee7888affd6c509b6"
+												},
+												"right": {
+													"literal": "0634f4ce1f99f2b3"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "96f086a3afb709648b236c5c527dbceebab0dd734010926fdf69b61f16c1285a"
+												},
+												"right": {
+													"literal": "eb21baba516beb59"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "6db2ec805e0658215078ff8d85ec058073186d7341e982c3231762612495c8b0"
+												},
+												"right": {
+													"literal": "8085e012ae0d2b3e"
+												}
+											}
+										}
+									}
+								},
+								"right": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "f4d768a4876807113515650b83c64fb0d48f5ff4b2a7ac47a492381379071763"
+												},
+												"right": {
+													"literal": "eb411ca5ca7db26d"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "c392a7833ee5a6d9c186e2d24f821e6693dcd55538f3a010aabbce16017d3956"
+												},
+												"right": {
+													"literal": "a21389214c8927c9"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "607cc4cd0dc1ef7be506b610e6e42916889b3a559c26040c5234bbaa32ce4b1c"
+												},
+												"right": {
+													"literal": "e561a3c8583fbd39"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "5d2c3a0c6c8b98b04e8540ccea86dd9eae3810a1143f12547dc3933b72a3bfe3"
+												},
+												"right": {
+													"literal": "f8effcbd80425f9f"
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "f750b92bf80840898261555801ebbc947b75ba042aa7547ba1126360890a7686"
+												},
+												"right": {
+													"literal": "fef81908cb2d4ea0"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "a2d63020d43a127269b91b6f70473a070a7a7a79d063a6888ec93228840f14b3"
+												},
+												"right": {
+													"literal": "9e9d83beb1125726"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "c94488ffafa45486f856049c2ee74445cc64d033bc47081a5702d8558225d77d"
+												},
+												"right": {
+													"literal": "cf074f782fb6f515"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "b399b2d0663cf4118f8792799da150a12ca010bea1af2c18a2f987c381179117"
+												},
+												"right": {
+													"literal": "248de4860801bbc2"
+												}
+											}
+										}
+									}
+								}
+							},
+							"right": {
+								"left": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "073afa381aa16a62c5f27eec526e837af8456ad7c9ac609cd11f247c1d21db7e"
+												},
+												"right": {
+													"literal": "92bb33373355bdc0"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "8a53b9c1e046534f8851f8f5be8baed83494048e4423433c9e3a7716defea2eb"
+												},
+												"right": {
+													"literal": "416c62220eecdda7"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "5c54b830e1422fd48f877f9ac646d2e1359cf6ad62107321a91978f3912d8cdd"
+												},
+												"right": {
+													"literal": "5523b3270409cee8"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "d138a91c0c262267217cebc8ec6dc89f9d0990d9d9f5fa1538bf8518ca3765d2"
+												},
+												"right": {
+													"literal": "42298a5fae5451a4"
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "9bab00d19a1d73b1a727e2a61ce08e4d3ccb3ae9ccc2c96dbd1491049655c78e"
+												},
+												"right": {
+													"literal": "3d292783c33cf8f8"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "46b610b102c24b76158cb737b15ef29dbd23559d2298dc73bf21b32b2119011e"
+												},
+												"right": {
+													"literal": "2cb96d54586f0bb7"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "654c5bf086622fb202d3079d9ef459a2f0327b4f2c16d40fa04c8c18b5e3fa06"
+												},
+												"right": {
+													"literal": "4b7474ffc3fa0c10"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "6298089a5545bd678155abde53608f703970057cf8c56d58fac38159779ba407"
+												},
+												"right": {
+													"literal": "3a556aab5e30afa5"
+												}
+											}
+										}
+									}
+								},
+								"right": {
+									"left": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "62b37c5d76edec221c1c0730b2858b54b6bd5384fb76f16bf28548afffe142a3"
+												},
+												"right": {
+													"literal": "4f853e451391f677"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "3f1ac4b27db1d8ee0d025bdd9e1e51b225cf33eda30cfdc830007543bd0258d2"
+												},
+												"right": {
+													"literal": "ca0bb55d5b0b8073"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"left": {
+													"literal": "067d2996ee4b029b471f76d15ab43fb2b7d4f6960d580f7a83ed344239b10aaf"
+												},
+												"right": {
+													"literal": "45a667fefdee7c09"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "58f93c9db667d10da517b6fafe22f3496157a3366d831338708218536fdd9090"
+												},
+												"right": {
+													"literal": "8dc0e786d770f083"
+												}
+											}
+										}
+									},
+									"right": {
+										"left": {
+											"left": {
+												"left": {
+													"literal": "ae9bb6887353d200390c0f501cae023478e772bf2d4f1a69bd89e2cbf0e6491a"
+												},
+												"right": {
+													"literal": "33f22cd923b88ef6"
+												}
+											},
+											"right": {
+												"left": {
+													"literal": "d2ba07bbb7ce2af1f60d2016857e2a7ce4c4e78e0593c2bf66adad4a7f102c57"
+												},
+												"right": {
+													"literal": "4985d9288ac3a4ca"
+												}
+											}
+										},
+										"right": {
+											"left": {
+												"literal": "f40150ca54695424e14557ffe9142a8cc3c6d35e0c3e94bdf5f2056b1d222def"
+											},
+											"right": {
+												"literal": "25df092c55c2786d"
+											}
+										}
+									}
+								}
+							}
+						},
+						"right": {
+							"literal": "4593443ad221449f"
+						}
+					},
+					"right": {
+						"literal": "874876e2b76389d2"
+					}
+				}
+			}
+		}
+	}
+}

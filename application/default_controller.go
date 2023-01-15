@@ -16,6 +16,7 @@ type DefaultController struct {
 	rightchainCenterService  *domain_services.RightchainCenterService
 	treeService              *domain_services.TreeService
 	unpackagedTreeRepository *repos.UnpackagedTreeRepository
+	packagedTreeRepository   *repos.PackagedTreeRepository
 }
 
 func NewDefaultController(
@@ -24,6 +25,7 @@ func NewDefaultController(
 	rightchainCenterService *domain_services.RightchainCenterService,
 	treeService *domain_services.TreeService,
 	unpackagedTreeRepository *repos.UnpackagedTreeRepository,
+	packagedTreeRepository *repos.PackagedTreeRepository,
 ) *DefaultController {
 	return &DefaultController{
 		snaphotService:           snaphotService,
@@ -31,6 +33,7 @@ func NewDefaultController(
 		rightchainCenterService:  rightchainCenterService,
 		treeService:              treeService,
 		unpackagedTreeRepository: unpackagedTreeRepository,
+		packagedTreeRepository:   packagedTreeRepository,
 	}
 }
 
@@ -49,6 +52,7 @@ func initSingletonDefaultController() *DefaultController {
 		domain_services.GetSingletonRightchainCenterService(),
 		domain_services.GetSingletonTreeService(),
 		repos.GetSingletonUnpackagedTreeRepository(),
+		repos.GetSingletonPackagedTreeRepository(),
 	)
 }
 
@@ -153,7 +157,6 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 		}
 
 		// success. TODO: save packagedTree ,
-		// TODO: 删除. (暂时不删除)
 		var packagedTree = &domain_models.PackagedTree{
 			PreviousCommit: unpackagedTree.PreviousCommit,
 			TransactionId:  recordResponse.TransactionId,
@@ -161,7 +164,13 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 			Tree:           slimTree,
 		}
 
-		log.Printf("TODO: save pacakgedTree. %v, %v, %v", packagedTree.PreviousCommit, packagedTree.RootOutput, packagedTree.Tree.GetOutput())
+		log.Printf("save pacakgedTree. %v, %v, %v", packagedTree.PreviousCommit, packagedTree.RootOutput, packagedTree.Tree.GetOutput())
+		err = p.packagedTreeRepository.SavePackagedTree(ctx, packagedTree)
+		if err != nil {
+			return xerrors.Errorf(": %w", err)
+		}
+
+		// TODO: 删除. (暂时不删除)
 	}
 
 	return nil
