@@ -11,12 +11,12 @@ import (
 )
 
 type DefaultController struct {
-	snaphotService           *domain_services.SnaphotService
-	recordSnapshotRepository *repos.RecordSnapshotRepository
-	rightchainCenterService  *domain_services.RightchainCenterService
-	treeService              *domain_services.TreeService
-	unpackagedTreeRepository *repos.UnpackagedTreeRepository
-	packagedTreeRepository   *repos.PackagedTreeRepository
+	snaphotService            *domain_services.SnaphotService
+	recordSnapshotRepository  *repos.RecordSnapshotRepository
+	rightchainCenterService   *domain_services.RightchainCenterService
+	treeService               *domain_services.TreeService
+	UnpackagedIndexRepository *repos.UnpackagedIndexRepository
+	packagedTreeRepository    *repos.PackagedTreeRepository
 }
 
 func NewDefaultController(
@@ -24,16 +24,16 @@ func NewDefaultController(
 	recordSnapshotRepository *repos.RecordSnapshotRepository,
 	rightchainCenterService *domain_services.RightchainCenterService,
 	treeService *domain_services.TreeService,
-	unpackagedTreeRepository *repos.UnpackagedTreeRepository,
+	UnpackagedIndexRepository *repos.UnpackagedIndexRepository,
 	packagedTreeRepository *repos.PackagedTreeRepository,
 ) *DefaultController {
 	return &DefaultController{
-		snaphotService:           snaphotService,
-		recordSnapshotRepository: recordSnapshotRepository,
-		rightchainCenterService:  rightchainCenterService,
-		treeService:              treeService,
-		unpackagedTreeRepository: unpackagedTreeRepository,
-		packagedTreeRepository:   packagedTreeRepository,
+		snaphotService:            snaphotService,
+		recordSnapshotRepository:  recordSnapshotRepository,
+		rightchainCenterService:   rightchainCenterService,
+		treeService:               treeService,
+		UnpackagedIndexRepository: UnpackagedIndexRepository,
+		packagedTreeRepository:    packagedTreeRepository,
 	}
 }
 
@@ -51,7 +51,7 @@ func initSingletonDefaultController() *DefaultController {
 		repos.GetSingletonRecordSnapshotRepository(),
 		domain_services.GetSingletonRightchainCenterService(),
 		domain_services.GetSingletonTreeService(),
-		repos.GetSingletonUnpackagedTreeRepository(),
+		repos.GetSingletonUnpackagedIndexRepository(),
 		repos.GetSingletonPackagedTreeRepository(),
 	)
 }
@@ -97,13 +97,13 @@ func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 	}
 
 	// make unpackaged tree and save
-	var unpackagedTree = &domain_models.UnpackagedTree{
+	var UnpackagedIndex = &domain_models.UnpackagedIndex{
 		PreviousCommit:   snapshot.PreviousCommit,
 		RecordFetchToken: createRecordResponse.Token,
 		PartialTree:      newPartialTree,
 	}
 
-	err = p.unpackagedTreeRepository.SaveUnpackagedTree(ctx, unpackagedTree)
+	err = p.UnpackagedIndexRepository.SaveUnpackagedIndex(ctx, UnpackagedIndex)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
@@ -111,33 +111,33 @@ func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 	return nil
 }
 
-func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
-	unpackagedTrees, err := p.unpackagedTreeRepository.GetAllUnpackagedTrees(ctx)
+func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error {
+	UnpackagedIndexs, err := p.UnpackagedIndexRepository.GetAllUnpackagedIndexs(ctx)
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
 	}
 
-	log.Printf("unpackagedTrees: %v", len(unpackagedTrees))
+	log.Printf("UnpackagedIndexs: %v", len(UnpackagedIndexs))
 
-	for _, unpackagedTree := range unpackagedTrees {
-		recordResponse, err := p.rightchainCenterService.OutOfBoxGetRecord(ctx, unpackagedTree.RecordFetchToken)
+	for _, UnpackagedIndex := range UnpackagedIndexs {
+		recordResponse, err := p.rightchainCenterService.OutOfBoxGetRecord(ctx, UnpackagedIndex.RecordFetchToken)
 		if err != nil {
 			return xerrors.Errorf(": %w", err)
 		}
 
 		if recordResponse.TransactionId == "" {
-			log.Printf("still not packaged: %v", unpackagedTree.PreviousCommit)
+			log.Printf("still not packaged: %v", UnpackagedIndex.PreviousCommit)
 			continue
 		}
 
 		// do package
 		var slimTree = recordResponse.SlimTree
 		target, targetParent := slimTree.FindNode(func(x *domain_models.RecipeNode) bool {
-			return x.Literal == unpackagedTree.PartialTree.GetOutput()
+			return x.Literal == UnpackagedIndex.PartialTree.GetOutput()
 		})
 
 		if target == nil {
-			return xerrors.Errorf("Cannot match literal when processing: %v", unpackagedTree.PreviousCommit)
+			return xerrors.Errorf("Cannot match literal when processing: %v", UnpackagedIndex.PreviousCommit)
 		}
 
 		if (targetParent.Left == target) == (targetParent.Right == target) {
@@ -145,20 +145,20 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 		}
 
 		if targetParent.Left == target {
-			targetParent.Left = unpackagedTree.PartialTree
+			targetParent.Left = UnpackagedIndex.PartialTree
 		} else {
-			targetParent.Right = unpackagedTree.PartialTree
+			targetParent.Right = UnpackagedIndex.PartialTree
 		}
 
 		slimTree.ClearCache()
 
 		if recordResponse.RootOutput != slimTree.GetOutput() {
-			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", unpackagedTree.PreviousCommit)
+			return xerrors.Errorf("recordResponse output not mactch slimTree output: %v", UnpackagedIndex.PreviousCommit)
 		}
 
 		// success. TODO: save packagedTree ,
 		var packagedTree = &domain_models.PackagedTree{
-			PreviousCommit: unpackagedTree.PreviousCommit,
+			PreviousCommit: UnpackagedIndex.PreviousCommit,
 			TransactionId:  recordResponse.TransactionId,
 			RootOutput:     recordResponse.RootOutput,
 			Tree:           slimTree,
@@ -171,7 +171,7 @@ func (p *DefaultController) FetchAllUnpackagedTrees(ctx context.Context) error {
 		}
 
 		// TODO: 删除. (暂时不删除)
-		err = p.unpackagedTreeRepository.Remove(ctx, unpackagedTree)
+		err = p.UnpackagedIndexRepository.Remove(ctx, UnpackagedIndex)
 		if err != nil {
 			return xerrors.Errorf(": %w", err)
 		}

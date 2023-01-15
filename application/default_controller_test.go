@@ -28,7 +28,7 @@ func TestDefaultController_TakeSnapshotAndUpload_happy_1(t *testing.T) {
 	assert.NoError(err)
 }
 
-func TestDefaultController_FetchAllUnpackagedTrees_happy_1(t *testing.T) {
+func TestDefaultController_FetchAllUnpackagedIndexs_happy_1(t *testing.T) {
 	var assert = utils.AnyAssert(t)
 
 	currentDir, err := os.Getwd()
@@ -41,7 +41,7 @@ func TestDefaultController_FetchAllUnpackagedTrees_happy_1(t *testing.T) {
 	var controller = application.GetSingletonDefaultController()
 
 	// act
-	err = controller.FetchAllUnpackagedTrees(ctx)
+	err = controller.FetchAllUnpackagedIndexs(ctx)
 
 	// assert
 	assert.NoError(err)

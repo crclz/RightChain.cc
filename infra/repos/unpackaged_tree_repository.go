@@ -13,38 +13,38 @@ import (
 	"golang.org/x/xerrors"
 )
 
-type UnpackagedTreeRepository struct {
+type UnpackagedIndexRepository struct {
 	diskCopyrightStore *data_sources.DiskCopyrightStore
 }
 
-func NewUnpackagedTreeRepository(
+func NewUnpackagedIndexRepository(
 	diskCopyrightStore *data_sources.DiskCopyrightStore,
-) *UnpackagedTreeRepository {
-	return &UnpackagedTreeRepository{
+) *UnpackagedIndexRepository {
+	return &UnpackagedIndexRepository{
 		diskCopyrightStore: diskCopyrightStore,
 	}
 }
 
 // wire
 
-var singletonUnpackagedTreeRepository *UnpackagedTreeRepository = initSingletonUnpackagedTreeRepository()
+var singletonUnpackagedIndexRepository *UnpackagedIndexRepository = initSingletonUnpackagedIndexRepository()
 
-func GetSingletonUnpackagedTreeRepository() *UnpackagedTreeRepository {
-	return singletonUnpackagedTreeRepository
+func GetSingletonUnpackagedIndexRepository() *UnpackagedIndexRepository {
+	return singletonUnpackagedIndexRepository
 }
 
-func initSingletonUnpackagedTreeRepository() *UnpackagedTreeRepository {
-	return NewUnpackagedTreeRepository(data_sources.GetSingletonDiskCopyrightStore())
+func initSingletonUnpackagedIndexRepository() *UnpackagedIndexRepository {
+	return NewUnpackagedIndexRepository(data_sources.GetSingletonDiskCopyrightStore())
 }
 
 // methods
 
-func (p *UnpackagedTreeRepository) GetPersistencePath(previousCommit string) string {
+func (p *UnpackagedIndexRepository) GetPersistencePath(previousCommit string) string {
 	var filePath = fmt.Sprintf("%v/%v.json", p.diskCopyrightStore.UnpackagedPath(), previousCommit)
 	return filePath
 }
 
-func (p *UnpackagedTreeRepository) SaveUnpackagedTree(ctx context.Context, tree *domain_models.UnpackagedTree) error {
+func (p *UnpackagedIndexRepository) SaveUnpackagedIndex(ctx context.Context, tree *domain_models.UnpackagedIndex) error {
 	var err = p.diskCopyrightStore.EnsureUnpackagedDirectory()
 	if err != nil {
 		return xerrors.Errorf(": %w", err)
@@ -63,15 +63,15 @@ func (p *UnpackagedTreeRepository) SaveUnpackagedTree(ctx context.Context, tree 
 	return nil
 }
 
-func (p *UnpackagedTreeRepository) GetUnpackagedTreeByPreviousCommit(
+func (p *UnpackagedIndexRepository) GetUnpackagedIndexByPreviousCommit(
 	ctx context.Context, previousCommit string,
-) (*domain_models.UnpackagedTree, error) {
+) (*domain_models.UnpackagedIndex, error) {
 	fileContent, err := ioutil.ReadFile(p.GetPersistencePath(previousCommit))
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
 
-	var result = &domain_models.UnpackagedTree{}
+	var result = &domain_models.UnpackagedIndex{}
 	err = json.Unmarshal(fileContent, result)
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
@@ -80,14 +80,14 @@ func (p *UnpackagedTreeRepository) GetUnpackagedTreeByPreviousCommit(
 	return result, nil
 }
 
-func (p *UnpackagedTreeRepository) GetAllUnpackagedTrees(ctx context.Context) ([]*domain_models.UnpackagedTree, error) {
+func (p *UnpackagedIndexRepository) GetAllUnpackagedIndexs(ctx context.Context) ([]*domain_models.UnpackagedIndex, error) {
 
 	files, err := filepath.Glob(p.diskCopyrightStore.UnpackagedPath() + "/*.json")
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
 	}
 
-	var results []*domain_models.UnpackagedTree
+	var results []*domain_models.UnpackagedIndex
 
 	for _, filename := range files {
 		fileContent, err := ioutil.ReadFile(filename)
@@ -95,7 +95,7 @@ func (p *UnpackagedTreeRepository) GetAllUnpackagedTrees(ctx context.Context) ([
 			return nil, xerrors.Errorf(": %w", err)
 		}
 
-		var result = &domain_models.UnpackagedTree{}
+		var result = &domain_models.UnpackagedIndex{}
 		err = json.Unmarshal(fileContent, result)
 		if err != nil {
 			return nil, xerrors.Errorf(": %w", err)
@@ -107,8 +107,8 @@ func (p *UnpackagedTreeRepository) GetAllUnpackagedTrees(ctx context.Context) ([
 	return results, nil
 }
 
-func (p *UnpackagedTreeRepository) Remove(
-	ctx context.Context, tree *domain_models.UnpackagedTree,
+func (p *UnpackagedIndexRepository) Remove(
+	ctx context.Context, tree *domain_models.UnpackagedIndex,
 ) error {
 	var filename = p.GetPersistencePath(tree.PreviousCommit)
 	var err = os.Remove(filename)
