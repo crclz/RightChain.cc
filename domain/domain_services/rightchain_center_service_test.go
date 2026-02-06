@@ -28,7 +28,7 @@ func TestRightchainCenterService_OutOfBoxCreateRecord_integrity_check(t *testing
 	t.Logf("Response is: %v", utils.ToJson(response))
 
 	// integrity check
-	assert.Equal(content, response.BridgeNode.Left.Literal)
+	assert.Equal(content, response.BridgeNode.Left.Value)
 	assert.Equal(response.RecordText, response.BridgeNode.GetOutput())
 }
 
@@ -38,7 +38,7 @@ func TestRightchainCenterService_OutOfBoxGetRecord_happy_1(t *testing.T) {
 	// arrange
 	var ctx = context.TODO()
 	var rightchainCenterService = domain_services.GetSingletonRightchainCenterService()
-	var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZWNvcmRJZCI6IjYzYzM4MjkyNjIxNDc4Y2IzYzVhOWY4MCJ9.HlPdPI0-qcp9JKja9NVXAfUCBSP7RcBoRPX4-EfHkmY"
+	var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZWNvcmRfaWQiOiI5OTVhOWNjZi1hNTYyLTQwYmUtYjZiNi1hYzQwMGUxZGE5NjkiLCJleHAiOjB9.PVpvaZLSTWUAmGRx8otPSz-FYdvRU6WcPe01aVruXHE"
 
 	// act
 	response, err := rightchainCenterService.OutOfBoxGetRecord(ctx, token)

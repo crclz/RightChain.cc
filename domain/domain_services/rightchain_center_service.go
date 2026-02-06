@@ -30,9 +30,9 @@ func initSingletonRightchainCenterService() *RightchainCenterService {
 // methods
 
 func (p *RightchainCenterService) BaseUrl() string {
-	const useLocal = false
+	const useLocal = true
 	if useLocal {
-		return "http://localhost:5071"
+		return "http://localhost:3000"
 	} else {
 		return "https://rightchain.cc"
 	}
@@ -49,10 +49,15 @@ func (p *RightchainCenterService) OutOfBoxCreateRecord(ctx context.Context, cont
 		return nil, xerrors.Errorf(": %w", err)
 	}
 
+	if !httpResponse.IsSuccessState() {
+		return nil, xerrors.Errorf("create-record http not success. status: %v, text: %v",
+			httpResponse.StatusCode, httpResponse.String())
+	}
+
 	var response = &dtos.OutOfBoxCreateRecordResponse{}
 	err = httpResponse.UnmarshalJson(response)
 	if err != nil {
-		return nil, xerrors.Errorf(": %w", err)
+		return nil, xerrors.Errorf("unmarshal json failure. string: %v, error: %w", httpResponse.String(), err)
 	}
 
 	return response, nil

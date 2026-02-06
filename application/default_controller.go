@@ -133,11 +133,11 @@ func (p *DefaultController) TakeSnapshotAndUpload(ctx context.Context) error {
 
 	var bridgeNode = createRecordResponse.BridgeNode
 
-	if bridgeNode.Left.Literal != partialTree.GetOutput() {
+	if bridgeNode.Left.Value != partialTree.GetOutput() {
 		panic("Server contract check fail")
 	}
 
-	bridgeNode.Left.Literal = ""
+	bridgeNode.Left.Value = ""
 	bridgeNode.Left = partialTree
 
 	// bridgeNode就是我们应当保存的
@@ -185,7 +185,7 @@ func (p *DefaultController) FetchAllUnpackagedIndexs(ctx context.Context) error 
 		// do package
 		var slimTree = recordResponse.SlimTree
 		target, targetParent := slimTree.FindNode(func(x *domain_models.RecipeNode) bool {
-			return x.Literal == unpackagedIndex.PartialTree.GetOutput()
+			return x.Value == unpackagedIndex.PartialTree.GetOutput()
 		})
 
 		if target == nil {
@@ -269,7 +269,7 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 		var fileHash = utils.GetSHA256OfBytes(fileBytes)
 
 		target, _ := packagedIndex.Tree.FindNode(func(x *domain_models.RecipeNode) bool {
-			return x.Literal == fileHash
+			return x.Value == fileHash
 		})
 
 		if target == nil && tryCrlf {
@@ -280,7 +280,7 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 				fileBytes = []byte(version)
 				fileHash = utils.GetSHA256OfBytes(fileBytes)
 				target, _ = packagedIndex.Tree.FindNode(func(x *domain_models.RecipeNode) bool {
-					return x.Literal == fileHash
+					return x.Value == fileHash
 				})
 
 				if target != nil {
@@ -321,12 +321,12 @@ func (p *DefaultController) GenerateProof(ctx context.Context, files []string, t
 		var keepLeft = dfs(node.Left)
 		if !keepLeft && node.Left != nil {
 			// trim left
-			node.Left = &domain_models.RecipeNode{Literal: node.Left.GetOutput()}
+			node.Left = &domain_models.RecipeNode{Value: node.Left.GetOutput()}
 		}
 
 		var keepRight = dfs(node.Right)
 		if !keepRight && node.Right != nil {
-			node.Right = &domain_models.RecipeNode{Literal: node.Right.GetOutput()}
+			node.Right = &domain_models.RecipeNode{Value: node.Right.GetOutput()}
 		}
 
 		return keepLeft || keepRight

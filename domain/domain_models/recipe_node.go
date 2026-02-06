@@ -3,10 +3,9 @@ package domain_models
 import "github.com/crclz/rightchain.cc/domain/utils"
 
 type RecipeNode struct {
-	Left          *RecipeNode `json:"left,omitempty"`
-	Right         *RecipeNode `json:"right,omitempty"`
-	Literal       string      `json:"literal,omitempty"`
-	LiteralToHash string      `json:"literalToHash,omitempty"`
+	Left  *RecipeNode `json:"left,omitempty"`
+	Right *RecipeNode `json:"right,omitempty"`
+	Value string      `json:"value,omitempty"`
 
 	outputCache string `json:"-"`
 
@@ -19,8 +18,7 @@ func (p *RecipeNode) IsValid() bool {
 	}
 
 	var conditions = []bool{
-		p.Literal != "",
-		p.LiteralToHash != "",
+		p.Value != "",
 		p.Left != nil,
 	}
 
@@ -43,12 +41,8 @@ func (p *RecipeNode) GetOutput() string {
 }
 
 func (p *RecipeNode) CalculateOutput() string {
-	if p.Literal != "" {
-		return p.Literal
-	}
-
-	if p.LiteralToHash != "" {
-		return utils.GetSHA256(p.LiteralToHash)
+	if p.Value != "" {
+		return p.Value
 	}
 
 	return utils.GetSHA256(p.Left.GetOutput() + p.Right.GetOutput())

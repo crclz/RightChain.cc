@@ -1,5 +1,5 @@
 {
-	"previousCommit": "b6ff7d9009e12e86d2af5b21186a79cb6b1bdc1a",
+	"previousCommit": "f678b44e7607435fed6adae35c6a50aae6799b24",
 	"fileSnapshots": [
 		{
 			"filename": ".gitignore",
@@ -7,7 +7,7 @@
 		},
 		{
 			"filename": "application/default_controller.go",
-			"hash": "392ee8c85cff99718750d7d1fb0fdb2827b7646bd23f83764f070f3c256f2afc"
+			"hash": "dac26ec154edad2dd49095871f64637718321cf29a63b97e08b428d70ed98f16"
 		},
 		{
 			"filename": "application/default_controller_test.go",
@@ -27,7 +27,7 @@
 		},
 		{
 			"filename": "domain/domain_models/recipe_node.go",
-			"hash": "44d36d00d067dc1a18e8482e21c8a180cffd99371193ca0e2edb7f85a527d843"
+			"hash": "943254eb50a664280cde6ef85ae341b5120f6c16b7b32ab198555207dfabd07d"
 		},
 		{
 			"filename": "domain/domain_models/repository_snapshot.go",
@@ -47,11 +47,11 @@
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service.go",
-			"hash": "345f3d41767d4b98e5688a29b3aa688180135e1c9113d6a6e74d8ce69aa28563"
+			"hash": "9a498e027ebe4804be6209703f925d0e63a7cff59d8127ac9ed496ebf62abf97"
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service_test.go",
-			"hash": "052173526ce95489fbbd297e4434bb3f356990ff56c29acd3d959f7b99bcd63e"
+			"hash": "70fda3ca110908a64b03255ef1365d5de28fee9f874d8e7bbc6b4d1fae3c449e"
 		},
 		{
 			"filename": "domain/domain_services/snapshot_service.go",
@@ -63,7 +63,7 @@
 		},
 		{
 			"filename": "domain/domain_services/tree_service.go",
-			"hash": "ec28b4acd26f73efee4222cb12bd9aadd0283bfab15906eaeb4b4b1ded59b2dc"
+			"hash": "61c88ea21967837a87ad091d00a2bb5c679a67f544e1c395b1cf360f950e2a91"
 		},
 		{
 			"filename": "domain/domain_services/tree_service_test.go",
@@ -83,11 +83,11 @@
 		},
 		{
 			"filename": "go.mod",
-			"hash": "caf3c2608116c96a59dd9f5211ce42e55ffb0c4337102fb95a1678f8f67c1a87"
+			"hash": "2b119d8b23343203d1477ce5ed7ccf57b39271d271d939d960740793318d4f7f"
 		},
 		{
 			"filename": "go.sum",
-			"hash": "bba0e4f8f28f0f6e3d604d9cf6b0f43c392d9c4e96a585e49f1b69090c9d4bb1"
+			"hash": "8e9d739399f31135b8c66c850941862d16b5191a3bfd3c2e22ea47ac5cb10c9a"
 		},
 		{
 			"filename": "gotfv.ps1",

@@ -58,10 +58,10 @@ func (p *TreeService) BuildTreeFromSnapshot(snapshot *domain_models.RepositorySn
 
 	for _, file := range snapshot.FileSnapshots {
 		nodeQueue.Enqueue(&domain_models.RecipeNode{
-			Literal: file.Hash,
+			Value: file.Hash,
 		})
 		nodeQueue.Enqueue(&domain_models.RecipeNode{
-			Literal: utils.GenerateSalt(8),
+			Value: utils.GenerateSalt(8),
 		})
 	}
 
