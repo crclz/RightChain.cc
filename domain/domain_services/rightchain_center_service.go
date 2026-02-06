@@ -30,7 +30,7 @@ func initSingletonRightchainCenterService() *RightchainCenterService {
 // methods
 
 func (p *RightchainCenterService) BaseUrl() string {
-	const useLocal = true
+	const useLocal = false
 	if useLocal {
 		return "http://localhost:3000"
 	} else {
@@ -72,6 +72,11 @@ func (p *RightchainCenterService) OutOfBoxGetRecord(ctx context.Context, token s
 
 	if err != nil {
 		return nil, xerrors.Errorf(": %w", err)
+	}
+
+	if !httpResponse.IsSuccessState() {
+		return nil, xerrors.Errorf("get-record http not success. status: %v, text: %v",
+			httpResponse.StatusCode, httpResponse.String())
 	}
 
 	var response = &dtos.OutOfBoxGetRecordResponse{}

@@ -1,5 +1,5 @@
 {
-	"previousCommit": "f678b44e7607435fed6adae35c6a50aae6799b24",
+	"previousCommit": "cbf41ef8b6813128aca5dd2be807398d0801f6d1",
 	"fileSnapshots": [
 		{
 			"filename": ".gitignore",
@@ -47,7 +47,7 @@
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service.go",
-			"hash": "9a498e027ebe4804be6209703f925d0e63a7cff59d8127ac9ed496ebf62abf97"
+			"hash": "b86a313a6aa7a39c3ddf43021dce74eff5fb00edebb6452df0ef42187dd660ba"
 		},
 		{
 			"filename": "domain/domain_services/rightchain_center_service_test.go",
@@ -83,11 +83,11 @@
 		},
 		{
 			"filename": "go.mod",
-			"hash": "2b119d8b23343203d1477ce5ed7ccf57b39271d271d939d960740793318d4f7f"
+			"hash": "4be704baa739636aa4a450af6a3c53c536184183e364b13596850610608e17c1"
 		},
 		{
 			"filename": "go.sum",
-			"hash": "8e9d739399f31135b8c66c850941862d16b5191a3bfd3c2e22ea47ac5cb10c9a"
+			"hash": "5dd563625ca2be0062df39a814c334d5020a25395b3fadd718f749bd18f1e4e3"
 		},
 		{
 			"filename": "gotfv.ps1",
